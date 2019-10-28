@@ -1,15 +1,28 @@
-/**
- * import POKEMON from './data/pokemon/pokemon.js'
- * import LoL from './data/lol/lol.js'
- * import POTTER from './data/potter/potter.js'
- */
+import POKEMON from './data/pokemon/pokemon.js';
+import { orderData } from './data.js';
 
-import { example } from './data.js';
+const list = document.getElementById("list");
 
-console.log(example);
+const order = orderData(POKEMON);
 
-/*
- * console.log(POKEMON);
- * console.log(LoL);
- * console.log(POTTER)
-*/
+order.forEach(element => {
+
+const divGeneral = document.createElement('div');
+
+const divName = document.createElement('p');
+divName.innerHTML = element.name;
+
+const divImage = document.createElement('img');
+divImage.setAttribute("src",element.img);
+
+divGeneral.appendChild(divImage);
+divGeneral.appendChild(divName);
+
+list.appendChild(divGeneral);
+
+});
+
+
+
+
+

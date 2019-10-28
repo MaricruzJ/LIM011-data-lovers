@@ -1,7 +1,15 @@
-/* Manejo de data */
+export const orderData = (dataPokemon) => {
+  let resultOrder = dataPokemon.sort((a, b) => {
 
-// esta es una función de ejemplo
+    if(a.name < b.name){
+      return -1;
+    }else if(a.name > b.name){
+      return 1;
+    }else{
+      return 0;
+    }
 
-export const example = () => {
-  return 'example';
+  });
+
+  return resultOrder;
 };
