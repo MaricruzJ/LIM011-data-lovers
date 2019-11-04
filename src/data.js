@@ -1,7 +1,6 @@
-/* Manejo de data */
-
-// esta es una función de ejemplo
-
-export const example = () => {
-  return 'example';
+export const orderData = (dataPokemon) => {
+  let resultOrder = dataPokemon.sort((a,b)=>{
+    return (a.name<b.name) ? -1 : 1
+  });
+  return resultOrder
 };

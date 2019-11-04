@@ -1,0 +1,72 @@
+body{
+    margin: 0px;
+}
+
+header{
+    text-align: center;
+    height: 150px;
+}
+
+header > img{
+    height: 100px;
+}
+
+.home{
+  background: #f2f2f2;
+  display: flex;
+}
+
+.container{
+  font-family: 'Raleway', sans-serif;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.ordenPokemon{
+  width: 70%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.item-pokemon{
+  background: white;
+  width: 170px;
+  text-align: center;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+.filtros{
+  background:white;
+  display: block;
+  margin: 20px;
+  width: 30%;
+}
+
+form {
+  padding: 50px;
+  padding-left: 200px;
+  width: 70%;
+}
+
+fieldset{
+  background: white;
+  border-radius: 5px;
+  border: 1px solid white;
+  padding: 0 0 0 50px;
+}
+
+input{
+  border: none;
+  padding: 0 0 0 100px;
+}
+
+.profile{
+  background: aquamarine;
+  display: flex;
+}
+
+.showDatos{
+  display: flex;
+  flex-wrap: wrap;
+}
