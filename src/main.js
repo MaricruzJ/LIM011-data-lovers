@@ -1,36 +1,22 @@
 import POKEMON from './data/pokemon/pokemon.js';
 import { orderData } from './data.js';
+import { search } from './data.js';
 
 const list = document.getElementById("list");
 const order = orderData(POKEMON);
-const datos = document.getElementById("datos");
-
-const divGeneral = document.createElement('div');
-const p = document.createElement('p');
-const divImage = document.createElement('img');
-
 
 order.forEach(data => {
   const divGeneral = document.createElement('div');
   divGeneral.classList.add('item-pokemon');
 
-
   document.getElementById("datos").style.display = 'none';
 
-  divGeneral.onclick = (event) => {
+  divGeneral.addEventListener('click', () => {
     document.getElementById("datos").style.display = 'block';
     document.getElementById("root").style.display = 'none';
-    if (data.next_evolution !== undefined) {
-      data.next_evolution.forEach(x => {
-        const nextEvolution = x.name;
-        console.log(nextEvolution);
-      });
-      console.log(nextEvolution);
-      
-    }
 
     document.getElementById("datos").innerHTML =
-    `<div>
+      `<div>
     <img src="${data.img}", alt="${data.name}">
     <p>Nombre: ${data.name}</p> 
     <p>Tipo: ${data.type} </p>
@@ -38,13 +24,73 @@ order.forEach(data => {
     <p>Candy-Count: ${data.candy_count}</p>
     <p>Peso: ${data.weight}</p>
     <p>Talla: ${data.height}</p>
-    <p>Multiplicadores: ${data.multiplier}</p>
+    <p id ="multipliers">Multiplicadores:</p>
     <p>Debilidades: ${data.weaknesses}</p>
+    <div id="evolution">
+      <div id="preEvolution">
+      </div>
+      <div id="nextEvolution">
+      </div>
+    </div>
   </div > `
-  
-  }
 
-  
+    let nextEvolution = document.getElementById('nextEvolution');
+    let preEvolution = document.getElementById('preEvolution');
+
+    if (data.next_evolution != undefined) {
+
+      let title = document.createElement('p');
+      nextEvolution.innerHTML = 'Siguiente Evolución';
+
+      nextEvolution.appendChild(title);
+
+      data.next_evolution.forEach(next => {
+
+        let image = document.createElement('img');
+        let name = document.createElement('p');
+
+        name.innerHTML = next.name;
+
+        let x = search(order, next.num);
+
+        image.setAttribute("src", x.img)
+
+        nextEvolution.appendChild(image);
+        nextEvolution.appendChild(name);
+
+      });
+
+    };
+
+    if (data.prev_evolution != undefined) {
+
+      let title = document.createElement('p');
+      title.innerHTML = 'Anterior Evolución';
+
+      preEvolution.appendChild(title);
+
+      data.prev_evolution.forEach(prev => {
+        console.log(prev);
+
+
+        let image = document.createElement('img');
+        let name = document.createElement('p');
+
+
+        name.innerHTML = prev.name;
+
+        let x = search(order, prev.num);
+
+        image.setAttribute("src", x.img);
+
+        
+        preEvolution.appendChild(image);
+        preEvolution.appendChild(name);
+      });
+
+    };
+
+  });
 
   const p = document.createElement('p');
   const divImage = document.createElement('img');
@@ -57,29 +103,3 @@ order.forEach(data => {
 
   list.appendChild(divGeneral);
 });
-
-
-/* order.forEach(data => {
-  const divGeneral = document.createElement('div');
-  divGeneral.classList.replace('item-pokemon', 'showDatos');
-
-  divGeneral.onclick = () => { }
-
-  const p = document.createElement('p');
-  const divImage = document.createElement('img');
-
-  divImage.setAttribute("src", data.img);
-  p.innerHTML = data.name;
-  p.innerHTML = data.type;
-  p.innerHTML = data.height;
-  p.innerHTML = data.weight;
-  p.innerHTML = data.candy;
-  p.innerHTML = data.multipliers;
-  p.innerHTML = data.weaknesses;
-  p.innerHTML = data.next_evolution;
-
-  divGeneral.appendChild(divImage);
-  divGeneral.appendChild(p);
-
-  datos.appendChild(divGeneral);
-}); */
