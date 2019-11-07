@@ -42,7 +42,7 @@ order.forEach(data => {
       let title = document.createElement('p');
       nextEvolution.innerHTML = 'Siguiente Evolución';
 
-      preEvolution.appendChild(title);
+      nextEvolution.appendChild(title);
 
       data.next_evolution.forEach(next => {
 
@@ -63,7 +63,7 @@ order.forEach(data => {
     };
 
     if (data.prev_evolution != undefined) {
-      
+
       let title = document.createElement('p');
       title.innerHTML = 'Anterior Evolución';
 
