@@ -4,12 +4,6 @@ import { search } from './data.js';
 
 const list = document.getElementById("list");
 const order = orderData(POKEMON);
-const datos = document.getElementById("datos");
-
-const divGeneral = document.createElement('div');
-const p = document.createElement('p');
-const divImage = document.createElement('img');
-
 
 order.forEach(data => {
   const divGeneral = document.createElement('div');
@@ -17,7 +11,7 @@ order.forEach(data => {
 
   document.getElementById("datos").style.display = 'none';
 
-  divGeneral.onclick = (event) => {
+  divGeneral.addEventListener('click', () => {
     document.getElementById("datos").style.display = 'block';
     document.getElementById("root").style.display = 'none';
 
@@ -30,37 +24,73 @@ order.forEach(data => {
     <p>Candy-Count: ${data.candy_count}</p>
     <p>Peso: ${data.weight}</p>
     <p>Talla: ${data.height}</p>
-    <p>Multiplicadores: ${data.multiplier}</p>
+    <p id ="multipliers">Multiplicadores:</p>
     <p>Debilidades: ${data.weaknesses}</p>
-    <div id="evolucion">Evolución:
+    <div id="evolution">
+      <div id="preEvolution">
+      </div>
+      <div id="nextEvolution">
+      </div>
     </div>
   </div > `
 
-    // console.log(data.next_evolution);  
-    let evolucion = document.getElementById('evolucion');
+    let nextEvolution = document.getElementById('nextEvolution');
+    let preEvolution = document.getElementById('preEvolution');
 
-    data.next_evolution.forEach(element => {
+    if (data.next_evolution != undefined) {
 
-      let image = document.createElement('img');
-      let name = document.createElement('p');
+      let title = document.createElement('p');
+      nextEvolution.innerHTML = 'Siguiente Evolución';
 
-      name.innerHTML = element.name;
+      preEvolution.appendChild(title);
 
-      let x = search(order, element.num);
-      console.log(x);
+      data.next_evolution.forEach(next => {
 
-      image.setAttribute("src", x.img)
+        let image = document.createElement('img');
+        let name = document.createElement('p');
 
+        name.innerHTML = next.name;
+
+        let x = search(order, next.num);
+
+        image.setAttribute("src", x.img)
+
+        nextEvolution.appendChild(image);
+        nextEvolution.appendChild(name);
+
+      });
+
+    };
+
+    if (data.prev_evolution != undefined) {
       
+      let title = document.createElement('p');
+      title.innerHTML = 'Anterior Evolución';
+
+      preEvolution.appendChild(title);
+
+      data.prev_evolution.forEach(prev => {
+        console.log(prev);
 
 
-      evolucion.appendChild(image);
-      evolucion.appendChild(name);
+        let image = document.createElement('img');
+        let name = document.createElement('p');
 
 
-    });
+        name.innerHTML = prev.name;
 
-  };
+        let x = search(order, prev.num);
+
+        image.setAttribute("src", x.img);
+
+        
+        preEvolution.appendChild(image);
+        preEvolution.appendChild(name);
+      });
+
+    };
+
+  });
 
   const p = document.createElement('p');
   const divImage = document.createElement('img');
