@@ -12,8 +12,11 @@ order.forEach(data => {
   document.getElementById("datos").style.display = 'none';
 
   divGeneral.addEventListener('click', () => {
+    
     document.getElementById("datos").style.display = 'block';
-    document.getElementById("root").style.display = 'none';
+    document.getElementById("home").style.display = 'none';
+    document.getElementById("header").style.display = 'none';
+
 
     document.getElementById("datos").innerHTML =
       `<div>
