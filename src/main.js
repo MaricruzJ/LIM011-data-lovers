@@ -1,105 +1,99 @@
 import POKEMON from './data/pokemon/pokemon.js';
-import { orderData } from './data.js';
-import { search } from './data.js';
+import { orderData, searchData } from './data.js';
 
-const list = document.getElementById("list");
+const list = document.getElementById('list');
 const order = orderData(POKEMON);
 
-order.forEach(data => {
+order.forEach((data) => {
   const divGeneral = document.createElement('div');
   divGeneral.classList.add('item-pokemon');
 
-  document.getElementById("datos").style.display = 'none';
+  document.getElementById('profile').style.display = 'none';
 
   divGeneral.addEventListener('click', () => {
-    
-    document.getElementById("datos").style.display = 'block';
-    document.getElementById("home").style.display = 'none';
-    document.getElementById("header").style.display = 'none';
+    document.getElementById('header').style.display = 'none';
+    document.getElementById('root').style.paddingTop = '0px';
+    document.getElementById('profile').style.display = 'block';
+    document.getElementById('home').style.display = 'none';
+    document.getElementById('header').style.display = 'none';
 
-
-    document.getElementById("datos").innerHTML =
-      `<div>
-    <img src="${data.img}", alt="${data.name}">
-    <p>Nombre: ${data.name}</p> 
-    <p>Tipo: ${data.type} </p>
-    <p>Candy: ${data.candy}</p>
-    <p>Candy-Count: ${data.candy_count}</p>
-    <p>Peso: ${data.weight}</p>
-    <p>Talla: ${data.height}</p>
-    <p id ="multipliers">Multiplicadores:</p>
-    <p>Debilidades: ${data.weaknesses}</p>
-    <div id="evolution">
-      <div id="preEvolution">
+    const template = `<div class = 'item-pokemon'>
+      <img src='${data.img}', alt='${data.name}'>
+      <p>Nombre: ${data.name}</p> 
       </div>
-      <div id="nextEvolution">
+      <div class = 'detail-pokemon'>
+      <p>Tipo: ${data.type} </p>
+      <p>Candy: ${data.candy}</p>
+      <p>Candy-Count: ${data.candy_count}</p>
+      <p>Peso: ${data.weight}</p>
+      <p>Talla: ${data.height}</p>
+      <p id ='multipliers'>Multiplicadores:</p>
+      <p>Debilidades: ${data.weaknesses}</p>
       </div>
-    </div>
-  </div > `
+      <div id='evolution'>
+        <div id='preEvolution'>
+        </div>
+        <div id='nextEvolution'>
+        </div>
+      </div> `;
 
-    let nextEvolution = document.getElementById('nextEvolution');
-    let preEvolution = document.getElementById('preEvolution');
+    document.getElementById('profile').innerHTML = template;
 
-    if (data.next_evolution != undefined) {
+    const nextEvolution = document.getElementById('nextEvolution');
+    const preEvolution = document.getElementById('preEvolution');
 
-      let title = document.createElement('p');
+    if (data.next_evolution !== undefined) {
+      const title = document.createElement('p');
       nextEvolution.innerHTML = 'Siguiente Evolución';
 
       nextEvolution.appendChild(title);
 
-      data.next_evolution.forEach(next => {
+      data.next_evolution.forEach((next) => {
+        const div = document.createElement('div');
+        div.setAttribute('class','item-pokemon');
+        const image = document.createElement('img');
+        const name = document.createElement('p');
 
-        let image = document.createElement('img');
-        let name = document.createElement('p');
-
+        div.appendChild(image);
+        div.appendChild(name);
+        
         name.innerHTML = next.name;
 
-        let x = search(order, next.num);
+        const x = searchData(order, next.num);
 
-        image.setAttribute("src", x.img)
+        image.setAttribute('src', x.img);
 
-        nextEvolution.appendChild(image);
-        nextEvolution.appendChild(name);
-
+        nextEvolution.appendChild(div);
       });
+    }
 
-    };
-
-    if (data.prev_evolution != undefined) {
-
-      let title = document.createElement('p');
+    if (data.prev_evolution !== undefined) {
+      const title = document.createElement('p');
       title.innerHTML = 'Anterior Evolución';
 
       preEvolution.appendChild(title);
 
-      data.prev_evolution.forEach(prev => {
-        console.log(prev);
-
-
-        let image = document.createElement('img');
-        let name = document.createElement('p');
-
+      data.prev_evolution.forEach((prev) => {
+        const image = document.createElement('img');
+        const name = document.createElement('p');
 
         name.innerHTML = prev.name;
 
-        let x = search(order, prev.num);
+        const x = searchData(order, prev.num);
 
-        image.setAttribute("src", x.img);
+        image.setAttribute('src', x.img);
 
-        
         preEvolution.appendChild(image);
         preEvolution.appendChild(name);
       });
-
-    };
-
+    }
   });
 
   const p = document.createElement('p');
   const divImage = document.createElement('img');
 
   p.innerHTML = data.name;
-  divImage.setAttribute("src", data.img);
+  divImage.setAttribute('src', data.img);
 
   divGeneral.appendChild(divImage);
   divGeneral.appendChild(p);

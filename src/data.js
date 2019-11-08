@@ -1,11 +1,15 @@
 
 export const orderData = (dataPokemon) => {
-  let resultOrder = dataPokemon.sort((a, b) => {
-    return (a.name < b.name) ? -1 : 1
+  const resultOrder = dataPokemon.sort((a, b) => {
+    let abc = 0;
+    if (a.name < b.name) abc = -1;
+    if (a.name > b.name) abc = 1;
+    return abc;
   });
-  return resultOrder
+  return resultOrder;
 };
 
-export const search = (dataBase, searchBy) => {
- return dataBase.find(data => data.num === searchBy);
+export const searchData = (dataBase, searchBy) => {
+  const a = dataBase.find((data) => data.num === searchBy);
+  return a;
 };
