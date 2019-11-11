@@ -2,6 +2,15 @@ import POKEMON from './data/pokemon/pokemon.js';
 import { orderData, searchData } from './data.js';
 
 const list = document.getElementById('list');
+const btnBack = document.getElementById('btn-back');
+
+btnBack.addEventListener('click', () => {
+  document.getElementById('profile').style.display = 'none';
+  document.getElementById('home').style.display = 'block';
+  document.getElementById('header').style.display = 'block';
+  document.getElementById('home').style.margin = '0px';
+});
+
 const order = orderData(POKEMON);
 
 order.forEach((data) => {
@@ -19,7 +28,7 @@ order.forEach((data) => {
 
     const template = `<div class = 'item-pokemon'>
       <img src='${data.img}', alt='${data.name}'>
-      <p>Nombre: ${data.name}</p> 
+      <p>${data.name}</p> 
       </div>
       <div class = 'detail-pokemon'>
       <p>Tipo: ${data.type} </p>
@@ -50,19 +59,20 @@ order.forEach((data) => {
 
       data.next_evolution.forEach((next) => {
         const div = document.createElement('div');
-        div.setAttribute('class','item-pokemon');
+        div.setAttribute('class', 'item-pokemon');
         const image = document.createElement('img');
         const name = document.createElement('p');
 
         div.appendChild(image);
         div.appendChild(name);
-        
+
         name.innerHTML = next.name;
 
         const x = searchData(order, next.num);
 
         image.setAttribute('src', x.img);
 
+        div.setAttribute('id', x.id);
         nextEvolution.appendChild(div);
       });
     }
@@ -74,17 +84,23 @@ order.forEach((data) => {
       preEvolution.appendChild(title);
 
       data.prev_evolution.forEach((prev) => {
+
+        const div = document.createElement('div');
+        div.setAttribute('class', 'item-pokemon');
         const image = document.createElement('img');
         const name = document.createElement('p');
+
+        div.appendChild(image);
+        div.appendChild(name);
 
         name.innerHTML = prev.name;
 
         const x = searchData(order, prev.num);
 
         image.setAttribute('src', x.img);
+        div.setAttribute('id', x.id);
 
-        preEvolution.appendChild(image);
-        preEvolution.appendChild(name);
+        preEvolution.appendChild(div);
       });
     }
   });
