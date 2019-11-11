@@ -29,7 +29,7 @@ order.forEach(data => {
     <div id="evolution">
       <div id="preEvolution">
       </div>
-      <div id="nextEvolution">
+      <div id="nextEvolution" >
       </div>
     </div>
   </div > `
