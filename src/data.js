@@ -10,6 +10,8 @@ export const orderData = (dataPokemon) => {
 };
 
 export const searchData = (dataBase, searchBy) => {
-  const a = dataBase.find((data) => data.num === searchBy);
+  console.log(searchBy);
+
+  const a = dataBase.find((data) => data.name.toUpperCase() === searchBy);
   return a;
 };

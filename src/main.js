@@ -6,16 +6,56 @@ const btnBack = document.getElementById('btn-back');
 
 btnBack.addEventListener('click', () => {
   document.getElementById('profile').style.display = 'none';
-  document.getElementById('home').style.display = 'block';
+  document.getElementById('home').style.display = 'flex';
   document.getElementById('header').style.display = 'block';
-  document.getElementById('home').style.margin = '0px';
+  document.getElementById('home').style.marginTop = '0px';
+  document.getElementById('home').style.padding = '16px';
+  document.getElementById('root').style.paddingTop = '128px';
 });
 
 const order = orderData(POKEMON);
 
+document.getElementById('search').addEventListener('keyup', () => {
+  const textSarch = document.getElementById('search').value;
+  let abc = searchData(order, textSarch.toUpperCase());
+  console.log(abc);
+
+  
+  /* for (let i = 0; i < order.length; i++) {
+    if (textSarch.indexOf(order[i])> -1) {
+        console.log("Object with index number "+i+" contains "+textSarch); 
+    }
+    return; */
+
+  /* const divGeneral = document.createElement('div');
+  divGeneral.classList.add('item-pokemon');
+
+  const p = document.createElement('p');
+  const divImage = document.createElement('img');
+
+  p.innerHTML = abc.name;
+  divImage.setAttribute('src', abc.img);
+
+  divGeneral.appendChild(divImage);
+  divGeneral.appendChild(p);
+
+  list.appendChild(divGeneral); */
+});
+
 order.forEach((data) => {
   const divGeneral = document.createElement('div');
   divGeneral.classList.add('item-pokemon');
+
+  const p = document.createElement('p');
+  const divImage = document.createElement('img');
+
+  p.innerHTML = data.name;
+  divImage.setAttribute('src', data.img);
+
+  divGeneral.appendChild(divImage);
+  divGeneral.appendChild(p);
+
+  list.appendChild(divGeneral);
 
   document.getElementById('profile').style.display = 'none';
 
@@ -104,15 +144,4 @@ order.forEach((data) => {
       });
     }
   });
-
-  const p = document.createElement('p');
-  const divImage = document.createElement('img');
-
-  p.innerHTML = data.name;
-  divImage.setAttribute('src', data.img);
-
-  divGeneral.appendChild(divImage);
-  divGeneral.appendChild(p);
-
-  list.appendChild(divGeneral);
 });
