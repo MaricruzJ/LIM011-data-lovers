@@ -26,7 +26,7 @@ order.forEach((data) => {
     document.getElementById('home').style.display = 'none';
     document.getElementById('header').style.display = 'none';
 
-    const template = `<div class = 'item-pokemon'>
+    let template = `<div class = 'item-pokemon'>
       <img src='${data.img}', alt='${data.name}'>
       <p>${data.name}</p> 
       </div>
@@ -75,6 +75,12 @@ order.forEach((data) => {
         div.setAttribute('id', x.id);
         nextEvolution.appendChild(div);
       });
+
+      const pevolucion= document.getElementById('x.id');
+      pevolucion.addEventListener('click', () => {
+        console.log(click);
+        
+      });
     }
 
     if (data.prev_evolution !== undefined) {
@@ -103,6 +109,8 @@ order.forEach((data) => {
         preEvolution.appendChild(div);
       });
     }
+
+
   });
 
   const p = document.createElement('p');
