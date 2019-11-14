@@ -1,21 +1,40 @@
 import POKEMON from './data/pokemon/pokemon.js';
-import { orderData, searchData } from './data.js';
+import { orderData, searchData, search } from './data.js';
 
 const list = document.getElementById('list');
 const btnBack = document.getElementById('btn-back');
 
 btnBack.addEventListener('click', () => {
   document.getElementById('profile').style.display = 'none';
-  document.getElementById('home').style.display = 'block';
+  document.getElementById('home').style.display = 'flex';
   document.getElementById('header').style.display = 'block';
-  document.getElementById('home').style.margin = '0px';
+  document.getElementById('home').style.marginTop = '0px';
+  document.getElementById('home').style.padding = '16px';
+  document.getElementById('root').style.paddingTop = '128px';
 });
 
 const order = orderData(POKEMON);
 
+document.getElementById('search').addEventListener('click', () => {
+  const textSarch = document.getElementById('search').value;
+  let abc = search(order, textSarch.toUpperCase());
+  console.log(abc);
+});
+
 order.forEach((data) => {
   const divGeneral = document.createElement('div');
   divGeneral.classList.add('item-pokemon');
+
+  const p = document.createElement('p');
+  const divImage = document.createElement('img');
+
+  p.innerHTML = data.name;
+  divImage.setAttribute('src', data.img);
+
+  divGeneral.appendChild(divImage);
+  divGeneral.appendChild(p);
+
+  list.appendChild(divGeneral);
 
   document.getElementById('profile').style.display = 'none';
 
@@ -51,11 +70,11 @@ order.forEach((data) => {
     const nextEvolution = document.getElementById('nextEvolution');
     const preEvolution = document.getElementById('preEvolution');
 
-    if (data.next_evolution !== undefined) {
+    const templateEvolution = (hi) => {
       const title = document.createElement('p');
-      nextEvolution.innerHTML = 'Siguiente Evolución';
+      hi.innerHTML = 'Siguiente Evolución';
 
-      nextEvolution.appendChild(title);
+      hi.appendChild(title);
 
       data.next_evolution.forEach((next) => {
         const div = document.createElement('div');
@@ -73,54 +92,18 @@ order.forEach((data) => {
         image.setAttribute('src', x.img);
 
         div.setAttribute('id', x.id);
-        nextEvolution.appendChild(div);
+        hi.appendChild(div);
       });
+    };
 
-      const pevolucion= document.getElementById('x.id');
-      pevolucion.addEventListener('click', () => {
-        console.log(click);
-        
-      });
+    if (data.next_evolution !== undefined) {
+      templateEvolution(nextEvolution);
     }
 
     if (data.prev_evolution !== undefined) {
-      const title = document.createElement('p');
-      title.innerHTML = 'Anterior Evolución';
-
-      preEvolution.appendChild(title);
-
-      data.prev_evolution.forEach((prev) => {
-
-        const div = document.createElement('div');
-        div.setAttribute('class', 'item-pokemon');
-        const image = document.createElement('img');
-        const name = document.createElement('p');
-
-        div.appendChild(image);
-        div.appendChild(name);
-
-        name.innerHTML = prev.name;
-
-        const x = searchData(order, prev.num);
-
-        image.setAttribute('src', x.img);
-        div.setAttribute('id', x.id);
-
-        preEvolution.appendChild(div);
-      });
+      templateEvolution(preEvolution);
     }
 
 
   });
-
-  const p = document.createElement('p');
-  const divImage = document.createElement('img');
-
-  p.innerHTML = data.name;
-  divImage.setAttribute('src', data.img);
-
-  divGeneral.appendChild(divImage);
-  divGeneral.appendChild(p);
-
-  list.appendChild(divGeneral);
 });

@@ -10,16 +10,15 @@ export const orderData = (dataPokemon) => {
 };
 
 export const searchData = (dataBase, searchBy) => {
+  console.log(searchBy);
+
   const a = dataBase.find((data) => data.num === searchBy);
   return a;
 };
 
-export const topDiez = (dataPokemon)=>{
-dataPokemon.sort((a,b)=> ((a.spawn_chance > b.spawn_chance)? -1: 1));
-const resultTopDiez = dataPokemon.slice(0,10);
-console.log(resultTopDiez);
-return resultTopDiez
+export const search = (dataBase, searchBy) => {
+  console.log(searchBy);
 
+  const a = dataBase.find((data) => data.name.toUpperCase() === searchBy);
+  return a;
 };
-
-
