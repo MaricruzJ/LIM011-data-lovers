@@ -1,4 +1,4 @@
-# Data Lovers - Pokemón
+# Data Lovers - Pokemanía
 
 ## Objetivos de aprendizaje
 
