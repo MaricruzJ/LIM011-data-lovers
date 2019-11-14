@@ -1,5 +1,5 @@
 import POKEMON from './data/pokemon/pokemon.js';
-import { orderData, searchData } from './data.js';
+import { orderData, searchData, search } from './data.js';
 
 const list = document.getElementById('list');
 const btnBack = document.getElementById('btn-back');
@@ -15,31 +15,10 @@ btnBack.addEventListener('click', () => {
 
 const order = orderData(POKEMON);
 
-document.getElementById('search').addEventListener('keyup', () => {
+document.getElementById('search').addEventListener('click', () => {
   const textSarch = document.getElementById('search').value;
-  let abc = searchData(order, textSarch.toUpperCase());
+  let abc = search(order, textSarch.toUpperCase());
   console.log(abc);
-
-  
-  /* for (let i = 0; i < order.length; i++) {
-    if (textSarch.indexOf(order[i])> -1) {
-        console.log("Object with index number "+i+" contains "+textSarch); 
-    }
-    return; */
-
-  /* const divGeneral = document.createElement('div');
-  divGeneral.classList.add('item-pokemon');
-
-  const p = document.createElement('p');
-  const divImage = document.createElement('img');
-
-  p.innerHTML = abc.name;
-  divImage.setAttribute('src', abc.img);
-
-  divGeneral.appendChild(divImage);
-  divGeneral.appendChild(p);
-
-  list.appendChild(divGeneral); */
 });
 
 order.forEach((data) => {
@@ -91,11 +70,11 @@ order.forEach((data) => {
     const nextEvolution = document.getElementById('nextEvolution');
     const preEvolution = document.getElementById('preEvolution');
 
-    if (data.next_evolution !== undefined) {
+    const templateEvolution = (hi) => {
       const title = document.createElement('p');
-      nextEvolution.innerHTML = 'Siguiente Evolución';
+      hi.innerHTML = 'Siguiente Evolución';
 
-      nextEvolution.appendChild(title);
+      hi.appendChild(title);
 
       data.next_evolution.forEach((next) => {
         const div = document.createElement('div');
@@ -113,35 +92,16 @@ order.forEach((data) => {
         image.setAttribute('src', x.img);
 
         div.setAttribute('id', x.id);
-        nextEvolution.appendChild(div);
+        hi.appendChild(div);
       });
+    };
+
+    if (data.next_evolution !== undefined) {
+      templateEvolution(nextEvolution);
     }
 
     if (data.prev_evolution !== undefined) {
-      const title = document.createElement('p');
-      title.innerHTML = 'Anterior Evolución';
-
-      preEvolution.appendChild(title);
-
-      data.prev_evolution.forEach((prev) => {
-
-        const div = document.createElement('div');
-        div.setAttribute('class', 'item-pokemon');
-        const image = document.createElement('img');
-        const name = document.createElement('p');
-
-        div.appendChild(image);
-        div.appendChild(name);
-
-        name.innerHTML = prev.name;
-
-        const x = searchData(order, prev.num);
-
-        image.setAttribute('src', x.img);
-        div.setAttribute('id', x.id);
-
-        preEvolution.appendChild(div);
-      });
+      templateEvolution(preEvolution);
     }
   });
 });

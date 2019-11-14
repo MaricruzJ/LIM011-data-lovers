@@ -12,6 +12,13 @@ export const orderData = (dataPokemon) => {
 export const searchData = (dataBase, searchBy) => {
   console.log(searchBy);
 
+  const a = dataBase.find((data) => data.num === searchBy);
+  return a;
+};
+
+export const search = (dataBase, searchBy) => {
+  console.log(searchBy);
+
   const a = dataBase.find((data) => data.name.toUpperCase() === searchBy);
   return a;
 };
