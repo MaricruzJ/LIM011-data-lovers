@@ -15,9 +15,43 @@ btnBack.addEventListener('click', () => {
 
 const order = orderData(POKEMON);
 
+const templateDetail = (pokemon) => {
+  const template = ` 
+                <div class='content-detail'>
+                <div class='left'>
+                  <p> Pokemon Seleccionado</p>
+                  <div class='item-pokemon'>
+                    <img src='${pokemon.img}' , alt='${pokemon.name}'>
+                    <p>${pokemon.name}</p>
+                  </div>
+                </div>
+                <div class='center'>
+                  <div class='detail-pokemon'>
+                    <p>Tipo: ${pokemon.type} </p>
+                    <p>Candy: ${pokemon.candy}</p>
+                    <p>Candy-Count: ${pokemon.candy_count}</p>
+                    <p>Peso: ${pokemon.weight}</p>
+                    <p>Talla: ${pokemon.height}</p>
+                    <p id='multipliers'>Multiplicadores:</p>
+                    <p>Debilidades: ${pokemon.weaknesses}</p>
+                  </div>
+                </div>
+                <div class='rigth'>
+                  <div id='evolution'>
+                    <div id='preEvolution' class=''>
+                    </div>
+                    <div id='nextEvolution' class=''>
+                    </div>
+                  </div>
+                </div>
+              </div>`;
+
+  document.getElementById('profile').innerHTML = template;
+};
+
 document.getElementById('search').addEventListener('click', () => {
   const textSarch = document.getElementById('search').value;
-  let abc = search(order, textSarch.toUpperCase());
+  const abc = search(order, textSarch.toUpperCase());
   console.log(abc);
 });
 
@@ -45,38 +79,18 @@ order.forEach((data) => {
     document.getElementById('home').style.display = 'none';
     document.getElementById('header').style.display = 'none';
 
-    const template = `<div class = 'item-pokemon'>
-      <img src='${data.img}', alt='${data.name}'>
-      <p>${data.name}</p> 
-      </div>
-      <div class = 'detail-pokemon'>
-      <p>Tipo: ${data.type} </p>
-      <p>Candy: ${data.candy}</p>
-      <p>Candy-Count: ${data.candy_count}</p>
-      <p>Peso: ${data.weight}</p>
-      <p>Talla: ${data.height}</p>
-      <p id ='multipliers'>Multiplicadores:</p>
-      <p>Debilidades: ${data.weaknesses}</p>
-      </div>
-      <div id='evolution'>
-        <div id='preEvolution'>
-        </div>
-        <div id='nextEvolution'>
-        </div>
-      </div> `;
-
-    document.getElementById('profile').innerHTML = template;
+    templateDetail(data);
 
     const nextEvolution = document.getElementById('nextEvolution');
     const preEvolution = document.getElementById('preEvolution');
 
-    const templateEvolution = (hi) => {
+    const templateEvolution = (elementHTML, evolution, texto) => {
       const title = document.createElement('p');
-      hi.innerHTML = 'Siguiente Evolución';
+      title.innerHTML = texto;
 
-      hi.appendChild(title);
+      elementHTML.appendChild(title);
 
-      data.next_evolution.forEach((next) => {
+      evolution.forEach((next) => {
         const div = document.createElement('div');
         div.setAttribute('class', 'item-pokemon');
         const image = document.createElement('img');
@@ -88,20 +102,23 @@ order.forEach((data) => {
         name.innerHTML = next.name;
 
         const x = searchData(order, next.num);
-
         image.setAttribute('src', x.img);
 
         div.setAttribute('id', x.id);
-        hi.appendChild(div);
+        elementHTML.appendChild(div);
+
+        document.getElementById(x.id).addEventListener('click', () => {
+          templateDetail(x);
+        });
       });
     };
 
     if (data.next_evolution !== undefined) {
-      templateEvolution(nextEvolution);
+      templateEvolution(nextEvolution, data.next_evolution, 'Siguiente Evolución');
     }
 
     if (data.prev_evolution !== undefined) {
-      templateEvolution(preEvolution);
+      templateEvolution(preEvolution, data.prev_evolution, 'Anterior Evolución');
     }
   });
 });

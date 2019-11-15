@@ -87,17 +87,36 @@ header {
 }
 
 .content-profile {
-  padding: 24px;
+  padding-top: 24px;
 }
 
 .detail-pokemon {
   text-align: left;
-  padding-left: 50px;
 }
 
 .hidden {
   display: none;
 }
+
+.content-detail{
+  display: flex;
+}
+
+.left{
+  width: 33%;
+  background-color: #c3d4f5;
+}
+
+.center{
+  width: 33%;
+  background-color: #fafad2;
+}
+
+.rigth{
+  width: 33%;
+  background-color: #f5d7d7;
+}
+
 
 /* Tablets en horizonal y escritorios normales */
 
