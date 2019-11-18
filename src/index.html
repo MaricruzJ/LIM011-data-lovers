@@ -12,20 +12,24 @@
 
 <body>
   <header id="header">
-    <img src="./images/menu.svg" alt="menu" class="menu show-mobile">
+    <img src="./images/menu.svg" alt="menu" id="menu" class="menu show-mobile">
     <img src="./images/Logo.png" alt="logo" class="logo">
   </header>
   <div id="root" class="container">
-
+    <aside id="filtros" class="filtros hidden">
+        <nav>
+          <ul>
+            <li class="card-filter">VER TODOS</li>
+            <li class="card-filter">FILTRAR POR</li>
+            <li class="card-filter">TOP TEN</li>
+            <li class="card-filter">TIPO</li>
+            <li class="card-filter">PESO</li>
+            <li class="card-filter">TALLA</li>
+          </ul>
+        </nav>
+    </aside>
     <section class="home" id="home">
-      <div class="filtros">
-        <div class="card-filter">FILTRAR POR:</div>
-        <div class="card-filter">TOP 10 DE POKEMONES</div>
-        <div class="card-filter">TIPO</div>
-        <div class="card-filter">PESO</div>
-        <div class="card-filter">DEFENSA</div>
-      </div>
-      <div id="list" class="container-pokemon">
+        <div id="list" class="container-pokemon">
         <input type="text" id="search" class="search" placeholder="Buscar pokemón">
       </div>
     </section>

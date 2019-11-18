@@ -3,12 +3,26 @@ import { orderData, searchData, search } from './data.js';
 
 const list = document.getElementById('list');
 const btnBack = document.getElementById('btn-back');
+const menu = document.getElementById('menu');
+const filtros = document.getElementById('filtros');
+const home = document.getElementById('home');
+
+menu.addEventListener('click', () => {  
+
+  if (filtros.classList.contains('hidden')) {
+    filtros.classList.remove('hidden');
+    filtros.classList.add('show');
+  } else {
+    filtros.classList.remove('show');
+    filtros.classList.add('hidden');
+  }
+})
 
 btnBack.addEventListener('click', () => {
   document.getElementById('content-profile').style.display = 'none';
-  document.getElementById('home').style.display = 'flex';
-  document.getElementById('home').style.marginTop = '0px';
-  document.getElementById('home').style.padding = '16px';
+  home.style.display = 'flex';
+  home.style.marginTop = '0px';
+  home.style.padding = '16px';
 });
 
 const templateDetail = (pokemon) => {
@@ -64,7 +78,9 @@ order.forEach((data) => {
 
   divGeneral.addEventListener('click', () => {
     document.getElementById('content-profile').style.display = 'block';
-    document.getElementById('home').style.display = 'none';
+    filtros.classList.remove('show');
+    filtros.classList.add('hidden');
+    home.style.display = 'none';
 
     templateDetail(data);
 
