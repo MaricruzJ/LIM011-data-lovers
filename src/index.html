@@ -18,15 +18,21 @@
   <div id="root" class="container">
 
     <section class="home" id="home">
-      <div class="filtros"></div>
+      <div class="filtros">
+        <div class="card-filter">FILTRAR POR:</div>
+        <div class="card-filter">TOP 10 DE POKEMONES</div>
+        <div class="card-filter">TIPO</div>
+        <div class="card-filter">PESO</div>
+        <div class="card-filter">DEFENSA</div>
+      </div>
       <div id="list" class="container-pokemon">
         <input type="text" id="search" class="search" placeholder="Buscar pokemón">
       </div>
     </section>
     <div id='content-profile' class="content-profile">
-      <button id="btn-back">
-        <img src="./images/back.svg" alt="volver">
-      </button> VOLVER
+      <button id="btn-back" class="btn-back">
+        <img src="./images/back.svg" alt="volver">VER MÁS POKEMONES
+      </button> 
       <div id="profile" class="profile"></div>
     </div>
   </div>

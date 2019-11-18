@@ -5,21 +5,16 @@ const list = document.getElementById('list');
 const btnBack = document.getElementById('btn-back');
 
 btnBack.addEventListener('click', () => {
-  document.getElementById('profile').style.display = 'none';
+  document.getElementById('content-profile').style.display = 'none';
   document.getElementById('home').style.display = 'flex';
-  document.getElementById('header').style.display = 'block';
   document.getElementById('home').style.marginTop = '0px';
   document.getElementById('home').style.padding = '16px';
-  document.getElementById('root').style.paddingTop = '128px';
 });
-
-const order = orderData(POKEMON);
 
 const templateDetail = (pokemon) => {
   const template = ` 
                 <div class='content-detail'>
                 <div class='left'>
-                  <p> Pokemon Seleccionado</p>
                   <div class='item-pokemon'>
                     <img src='${pokemon.img}' , alt='${pokemon.name}'>
                     <p>${pokemon.name}</p>
@@ -35,25 +30,20 @@ const templateDetail = (pokemon) => {
                     <p id='multipliers'>Multiplicadores:</p>
                     <p>Debilidades: ${pokemon.weaknesses}</p>
                   </div>
-                </div>
-                <div class='rigth'>
-                  <div id='evolution'>
-                    <div id='preEvolution' class=''>
+                
+                  <div id='evolution' class='div-evolution'>
+                    <div id='preEvolution' class='evolution'>
                     </div>
-                    <div id='nextEvolution' class=''>
+                    <div id='nextEvolution' class='evolution'>
                     </div>
-                  </div>
                 </div>
-              </div>`;
-
+              </div>
+              </div>
+              `;
   document.getElementById('profile').innerHTML = template;
 };
 
-document.getElementById('search').addEventListener('click', () => {
-  const textSarch = document.getElementById('search').value;
-  const abc = search(order, textSarch.toUpperCase());
-  console.log(abc);
-});
+const order = orderData(POKEMON);
 
 order.forEach((data) => {
   const divGeneral = document.createElement('div');
@@ -70,14 +60,11 @@ order.forEach((data) => {
 
   list.appendChild(divGeneral);
 
-  document.getElementById('profile').style.display = 'none';
+  document.getElementById('content-profile').style.display = 'none';
 
   divGeneral.addEventListener('click', () => {
-    document.getElementById('header').style.display = 'none';
-    document.getElementById('root').style.paddingTop = '0px';
-    document.getElementById('profile').style.display = 'block';
+    document.getElementById('content-profile').style.display = 'block';
     document.getElementById('home').style.display = 'none';
-    document.getElementById('header').style.display = 'none';
 
     templateDetail(data);
 
@@ -91,21 +78,21 @@ order.forEach((data) => {
       elementHTML.appendChild(title);
 
       evolution.forEach((next) => {
-        const div = document.createElement('div');
-        div.setAttribute('class', 'item-pokemon');
+        const divEvolution = document.createElement('div');
+        divEvolution.setAttribute('class', 'item-pokemon');
         const image = document.createElement('img');
         const name = document.createElement('p');
 
-        div.appendChild(image);
-        div.appendChild(name);
+        divEvolution.appendChild(image);
+        divEvolution.appendChild(name);
 
         name.innerHTML = next.name;
 
         const x = searchData(order, next.num);
         image.setAttribute('src', x.img);
 
-        div.setAttribute('id', x.id);
-        elementHTML.appendChild(div);
+        divEvolution.setAttribute('id', x.id);
+        elementHTML.appendChild(divEvolution);
 
         document.getElementById(x.id).addEventListener('click', () => {
           templateDetail(x);
@@ -121,4 +108,10 @@ order.forEach((data) => {
       templateEvolution(preEvolution, data.prev_evolution, 'Anterior Evolución');
     }
   });
+});
+
+document.getElementById('search').addEventListener('click', () => {
+  const textSarch = document.getElementById('search').value;
+  const abc = search(order, textSarch.toUpperCase());
+  console.log(abc);
 });
