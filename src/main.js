@@ -2,6 +2,7 @@ import POKEMON from './data/pokemon/pokemon.js';
 import { orderData, searchData, search, filters, getOption, topDiez } from './data.js';
  
 const list = document.getElementById('list');
+const profile = document.getElementById('profile');
 const btnBack = document.getElementById('btn-back');
  
 btnBack.addEventListener('click', () => {
@@ -14,9 +15,27 @@ btnBack.addEventListener('click', () => {
 });
  
 const order = orderData(POKEMON);
+
+const templatePrincipal = (pokemon) => {
+const templateOne = document.createElement('div');
+templateOne.classList.add('item-pokemon');
+
+const p = document.createElement('p');
+const divImage = document.createElement('img');
+
+p.setAttribute('src', pokemon.name);
+divImage.setAttribute('src', pokemon.img);
+
+templateOne.appendChild(divImage);
+templateOne.appendChild(p);
+
+list.appendChild(templateOne);
+
+list.innerHTML = templateOne;
+};
  
 const templateDetail = (pokemon) => {
-  const template = `
+  const templateTwo = `
                 <div class='content-detail'>
                 <div class='left'>
                   <p> Pokemon Seleccionado</p>
@@ -46,7 +65,7 @@ const templateDetail = (pokemon) => {
                 </div>
               </div>`;
  
-  document.getElementById('profile').innerHTML = template;
+  profile.innerHTML = templateTwo;
 };
  
 document.getElementById('search').addEventListener('click', () => {
@@ -128,40 +147,101 @@ const topTen = document.getElementById('topTen');
 const mostrarTopTen = topDiez(order);
 
 topTen.addEventListener('click', () => {
-  list.innerHTML = '';
-  mostrarTopTen.forEach((data) => {
+  mostrarTopTen.map((data) => {
     const divGeneral = document.createElement('div');
-    divGeneral.classList.add('item-pokemon');
-    const p = document.createElement('p');
-    const divImage = document.createElement('img');
-    p.innerHTML = data.name;
-    divImage.setAttribute('src', data.img);
-    divGeneral.appendChild(divImage);
-    divGeneral.appendChild(p);
-    list.appendChild(divGeneral);
+    divGeneral.innerHTML ="templatePrincipal(data)"; 
+
+      divGeneral.addEventListener('click', () => {
+      document.getElementById('header').style.display = 'none';
+      document.getElementById('root').style.paddingTop = '0px';
+      document.getElementById('profile').style.display = 'block';
+      document.getElementById('home').style.display = 'none';
+      document.getElementById('header').style.display = 'none';
+   
+      templateDetail(data);
+    });
   });
 });
  
-const typeFilters = document.getElementById('id_type');
+
+const showFilters = filters(order, 'filter', 'value');
+let showFiltersOrder = orderData(showFilters);
+
+const selectTypeFilters = document.querySelector('#id_type');
 getOption('type').map((element) => {
   const option = document.createElement('option');
   option.setAttribute('value', element);
   option.innerText = element;
  
-  typeFilters.appendChild(option);
+  selectTypeFilters.appendChild(option);
+
+  selectTypeFilters.addEventListener('change', (event)=>{
+    showFiltersOrder = filters(order, 'type', event.target.value);
+    console.log(showFiltersOrder);
+    list.innerHTML = '';
+
+      showFiltersOrder.map((data)=>{
+      const divGeneral = document.createElement('div');
+      divGeneral.classList.add('item-pokemon');
+      const p = document.createElement('p');
+      const divImage = document.createElement('img');
+      p.innerHTML = data.name;
+      divImage.setAttribute('src', data.img);
+      divGeneral.appendChild(divImage);
+      divGeneral.appendChild(p);
+      list.appendChild(divGeneral);
+
+      document.getElementById('profile').style.display = 'none';
+ 
+      divGeneral.addEventListener('click', () => {
+        document.getElementById('header').style.display = 'none';
+        document.getElementById('root').style.paddingTop = '0px';
+        document.getElementById('profile').style.display = 'block';
+        document.getElementById('home').style.display = 'none';
+        document.getElementById('header').style.display = 'none';
+     
+        templateDetail(data);
+      });
+    });
+  });
 });
  
-const weaknessesFilters = document.getElementById('id_weaknesses');
+const selectWeaknessesFilters = document.querySelector('#id_weaknesses');
 getOption('weaknesses').map((element) => {
   const option = document.createElement('option');
   option.setAttribute('value', element);
   option.innerText = element;
  
-  weaknessesFilters.appendChild(option);
+  selectWeaknessesFilters.appendChild(option);
 
+  selectWeaknessesFilters.addEventListener('change', (event)=>{
+    showFiltersOrder = filters(order, 'weaknesses', event.target.value);
+    console.log(showFiltersOrder);
+    list.innerHTML = '';
+
+    showFiltersOrder.map((data)=>{
+      const divGeneral = document.createElement('div');
+      divGeneral.classList.add('item-pokemon');
+      const p = document.createElement('p');
+      const divImage = document.createElement('img');
+      p.innerHTML = data.name;
+      divImage.setAttribute('src', data.img);
+      divGeneral.appendChild(divImage);
+      divGeneral.appendChild(p);
+      list.appendChild(divGeneral);
+
+      document.getElementById('profile').style.display = 'none';
  
-});
+      divGeneral.addEventListener('click', () => {
+        document.getElementById('header').style.display = 'none';
+        document.getElementById('root').style.paddingTop = '0px';
+        document.getElementById('profile').style.display = 'block';
+        document.getElementById('home').style.display = 'none';
+        document.getElementById('header').style.display = 'none';
+     
+        templateDetail(data);
+      });
 
-/* const filtros = filters(order, 'type', 'Grass');
-console.log(filtros);
-  */
+    });
+  });
+});
