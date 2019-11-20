@@ -4,14 +4,26 @@ import { orderData, searchData, search, filters, getOption, topDiez } from './da
 const list = document.getElementById('list');
 const profile = document.getElementById('profile');
 const btnBack = document.getElementById('btn-back');
- 
+const menu = document.getElementById('menu');
+const filtros = document.getElementById('filtros');
+const home = document.getElementById('home');
+
+menu.addEventListener('click', () => {  
+
+  if (filtros.classList.contains('hidden')) {
+    filtros.classList.remove('hidden');
+    filtros.classList.add('show');
+  } else {
+    filtros.classList.remove('show');
+    filtros.classList.add('hidden');
+  }
+})
+
 btnBack.addEventListener('click', () => {
-  document.getElementById('profile').style.display = 'none';
-  document.getElementById('home').style.display = 'flex';
-  document.getElementById('header').style.display = 'block';
-  document.getElementById('home').style.marginTop = '0px';
-  document.getElementById('home').style.padding = '16px';
-  document.getElementById('root').style.paddingTop = '128px';
+  document.getElementById('content-profile').style.display = 'none';
+  home.style.display = 'flex';
+  home.style.marginTop = '0px';
+  home.style.padding = '16px';
 });
  
 const order = orderData(POKEMON);
@@ -73,7 +85,7 @@ document.getElementById('search').addEventListener('click', () => {
   const abc = search(order, textSarch.toUpperCase());
   console.log(abc);
 });
- 
+
 order.forEach((data) => {
   const divGeneral = document.createElement('div');
   divGeneral.classList.add('item-pokemon');
@@ -88,44 +100,48 @@ order.forEach((data) => {
   divGeneral.appendChild(p);
  
   list.appendChild(divGeneral);
- 
-  document.getElementById('profile').style.display = 'none';
- 
+
+  document.getElementById('content-profile').style.display = 'none';
+
   divGeneral.addEventListener('click', () => {
-    document.getElementById('header').style.display = 'none';
-    document.getElementById('root').style.paddingTop = '0px';
-    document.getElementById('profile').style.display = 'block';
-    document.getElementById('home').style.display = 'none';
-    document.getElementById('header').style.display = 'none';
- 
+    document.getElementById('content-profile').style.display = 'block';
+    filtros.classList.remove('show');
+    filtros.classList.add('hidden');
+    home.style.display = 'none';
+
     templateDetail(data);
- 
+
     const nextEvolution = document.getElementById('nextEvolution');
     const preEvolution = document.getElementById('preEvolution');
- 
+
     const templateEvolution = (elementHTML, evolution, texto) => {
       const title = document.createElement('p');
       title.innerHTML = texto;
- 
+
       elementHTML.appendChild(title);
- 
+
       evolution.forEach((next) => {
-        const div = document.createElement('div');
-        div.setAttribute('class', 'item-pokemon');
+        const divEvolution = document.createElement('div');
+        divEvolution.setAttribute('class', 'item-pokemon');
         const image = document.createElement('img');
         const name = document.createElement('p');
- 
-        div.appendChild(image);
-        div.appendChild(name);
- 
+
+        divEvolution.appendChild(image);
+        divEvolution.appendChild(name);
+
         name.innerHTML = next.name;
  
         const x = searchData(order, next.num);
         image.setAttribute('src', x.img);
+
  
         div.setAttribute('id', x.id);
         elementHTML.appendChild(div);
- 
+
+        divEvolution.setAttribute('id', x.id);
+        elementHTML.appendChild(divEvolution);
+
+
         document.getElementById(x.id).addEventListener('click', () => {
           templateDetail(x);
         });
@@ -141,7 +157,7 @@ order.forEach((data) => {
     }
   });
 });
- 
+
 const topTen = document.getElementById('topTen');
  
 const mostrarTopTen = topDiez(order);
@@ -244,4 +260,10 @@ getOption('weaknesses').map((element) => {
 
     });
   });
+
+document.getElementById('search').addEventListener('click', () => {
+  const textSarch = document.getElementById('search').value;
+  const abc = search(order, textSarch.toUpperCase());
+  console.log(abc);
+
 });
