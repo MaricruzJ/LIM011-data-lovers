@@ -149,7 +149,7 @@ const mostrarTopTen = topDiez(order);
 topTen.addEventListener('click', () => {
   mostrarTopTen.map((data) => {
     const divGeneral = document.createElement('div');
-    divGeneral.innerHTML ="templatePrincipal(data)"; 
+    divGeneral.innerHTML = templatePrincipal(data); 
 
       divGeneral.addEventListener('click', () => {
       document.getElementById('header').style.display = 'none';
