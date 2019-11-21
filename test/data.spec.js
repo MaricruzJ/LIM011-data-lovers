@@ -1,4 +1,4 @@
-import { orderData, searchData } from '../src/data.js';
+import { orderData } from '../src/data.js';
 import POKEMON from '../src/data/pokemon/pokemon.js';
 
 describe('orderData ', () => {
