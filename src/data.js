@@ -30,13 +30,13 @@ export const filters = (data, filter, value) => {
     return data.filter((poke) => {
     const pokeValue = poke[filter];
     if(typeof pokeValue === 'object') return pokeValue.indexOf(value) > -1;
-    console.log(pokeValue);
+    /* console.log(pokeValue); */
     return pokeValue; 
   });
 };
 
 
-export const getOption = (property) => {
+export const getOption = (POKEMON, property) => {
   const elements = [];
   POKEMON.forEach((pokemon) => {
     pokemon[property].forEach((value) => {

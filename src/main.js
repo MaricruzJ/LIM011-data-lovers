@@ -1,6 +1,6 @@
 import POKEMON from './data/pokemon/pokemon.js';
 import { orderData, searchData, search, filters, getOption, topDiez } from './data.js';
- 
+
 const list = document.getElementById('list');
 const profile = document.getElementById('profile');
 const btnBack = document.getElementById('btn-back');
@@ -8,7 +8,7 @@ const menu = document.getElementById('menu');
 const filtros = document.getElementById('filtros');
 const home = document.getElementById('home');
 
-menu.addEventListener('click', () => {  
+menu.addEventListener('click', () => {
 
   if (filtros.classList.contains('hidden')) {
     filtros.classList.remove('hidden');
@@ -25,27 +25,9 @@ btnBack.addEventListener('click', () => {
   home.style.marginTop = '0px';
   home.style.padding = '16px';
 });
- 
+
 const order = orderData(POKEMON);
 
-const templatePrincipal = (pokemon) => {
-const templateOne = document.createElement('div');
-templateOne.classList.add('item-pokemon');
-
-const p = document.createElement('p');
-const divImage = document.createElement('img');
-
-p.setAttribute('src', pokemon.name);
-divImage.setAttribute('src', pokemon.img);
-
-templateOne.appendChild(divImage);
-templateOne.appendChild(p);
-
-list.appendChild(templateOne);
-
-list.innerHTML = templateOne;
-};
- 
 const templateDetail = (pokemon) => {
   const templateTwo = `
                 <div class='content-detail'>
@@ -76,194 +58,152 @@ const templateDetail = (pokemon) => {
                   </div>
                 </div>
               </div>`;
- 
+
   profile.innerHTML = templateTwo;
 };
- 
-document.getElementById('search').addEventListener('click', () => {
-  const textSarch = document.getElementById('search').value;
-  const abc = search(order, textSarch.toUpperCase());
-  console.log(abc);
-});
 
-order.forEach((data) => {
-  const divGeneral = document.createElement('div');
-  divGeneral.classList.add('item-pokemon');
- 
-  const p = document.createElement('p');
-  const divImage = document.createElement('img');
- 
-  p.innerHTML = data.name;
-  divImage.setAttribute('src', data.img);
- 
-  divGeneral.appendChild(divImage);
-  divGeneral.appendChild(p);
- 
-  list.appendChild(divGeneral);
-
-  document.getElementById('content-profile').style.display = 'none';
-
-  divGeneral.addEventListener('click', () => {
-    document.getElementById('content-profile').style.display = 'block';
-    filtros.classList.remove('show');
-    filtros.classList.add('hidden');
-    home.style.display = 'none';
-
-    templateDetail(data);
-
-    const nextEvolution = document.getElementById('nextEvolution');
-    const preEvolution = document.getElementById('preEvolution');
-
-    const templateEvolution = (elementHTML, evolution, texto) => {
-      const title = document.createElement('p');
-      title.innerHTML = texto;
-
-      elementHTML.appendChild(title);
-
-      evolution.forEach((next) => {
-        const divEvolution = document.createElement('div');
-        divEvolution.setAttribute('class', 'item-pokemon');
-        const image = document.createElement('img');
-        const name = document.createElement('p');
-
-        divEvolution.appendChild(image);
-        divEvolution.appendChild(name);
-
-        name.innerHTML = next.name;
- 
-        const x = searchData(order, next.num);
-        image.setAttribute('src', x.img);
-
- 
-        div.setAttribute('id', x.id);
-        elementHTML.appendChild(div);
-
-        divEvolution.setAttribute('id', x.id);
-        elementHTML.appendChild(divEvolution);
+const general = (order) => {
+console.log('fn genral', order);
 
 
-        document.getElementById(x.id).addEventListener('click', () => {
-          templateDetail(x);
+  order.forEach((data) => {
+    const divGeneral = document.createElement('div');
+    divGeneral.classList.add('item-pokemon');
+
+    const p = document.createElement('p');
+    const divImage = document.createElement('img');
+
+    p.innerHTML = data.name;
+    divImage.setAttribute('src', data.img);
+
+    divGeneral.appendChild(divImage);
+    divGeneral.appendChild(p);
+
+    list.appendChild(divGeneral);
+
+    document.getElementById('content-profile').style.display = 'none';
+
+    divGeneral.addEventListener('click', () => {
+      console.log('hola');
+
+      document.getElementById('content-profile').style.display = 'block';
+      filtros.classList.remove('show');
+      filtros.classList.add('hidden');
+      home.style.display = 'none';
+
+      templateDetail(data);
+
+      const nextEvolution = document.getElementById('nextEvolution');
+      const preEvolution = document.getElementById('preEvolution');
+
+      if (data.next_evolution !== undefined) {
+        const title = document.createElement('p');
+        title.innerHTML = 'Next Evolución';
+
+        nextEvolution.appendChild(title);
+
+        data.next_evolution.forEach((next) => {
+          const divEvolution = document.createElement('div');
+          divEvolution.setAttribute('class', 'item-pokemon');
+          const image = document.createElement('img');
+          const name = document.createElement('p');
+
+          divEvolution.appendChild(image);
+          divEvolution.appendChild(name);
+
+          name.innerHTML = next.name;
+
+          const x = searchData(order, next.num);
+          image.setAttribute('src', x.img);
+
+          nextEvolution.appendChild(divEvolution);
+
         });
-      });
-    };
- 
-    if (data.next_evolution !== undefined) {
-      templateEvolution(nextEvolution, data.next_evolution, 'Siguiente Evolución');
-    }
- 
-    if (data.prev_evolution !== undefined) {
-      templateEvolution(preEvolution, data.prev_evolution, 'Anterior Evolución');
-    }
+      }
+
+      if (data.prev_evolution !== undefined) {
+        const title = document.createElement('p');
+        title.innerHTML = 'Pre Evolución';
+
+        preEvolution.appendChild(title);
+
+        data.prev_evolution.forEach((next) => {
+          console.log(next);
+          
+          const divEvolution = document.createElement('div');
+          divEvolution.setAttribute('class', 'item-pokemon');
+          const image = document.createElement('img');
+          const name = document.createElement('p');
+
+          divEvolution.appendChild(image);
+          divEvolution.appendChild(name);
+
+          name.innerHTML = next.name;
+
+          const x = searchData(order, next.num);
+          image.setAttribute('src', x.img);
+
+       preEvolution.appendChild(divEvolution); 
+
+
+        });
+      }
+    });
   });
-});
+};
+
+general(order);
 
 const topTen = document.getElementById('topTen');
- 
+
 const mostrarTopTen = topDiez(order);
 
 topTen.addEventListener('click', () => {
-  mostrarTopTen.map((data) => {
-    const divGeneral = document.createElement('div');
-    divGeneral.innerHTML ="templatePrincipal(data)"; 
-
-      divGeneral.addEventListener('click', () => {
-      document.getElementById('header').style.display = 'none';
-      document.getElementById('root').style.paddingTop = '0px';
-      document.getElementById('profile').style.display = 'block';
-      document.getElementById('home').style.display = 'none';
-      document.getElementById('header').style.display = 'none';
-   
-      templateDetail(data);
-    });
-  });
+  list.innerHTML = "";
+  general(mostrarTopTen);
 });
- 
 
-const showFilters = filters(order, 'filter', 'value');
-let showFiltersOrder = orderData(showFilters);
+let showFiltersOrder = filters(POKEMON, 'filter', 'value');
 
 const selectTypeFilters = document.querySelector('#id_type');
-getOption('type').map((element) => {
+getOption(POKEMON, 'type').map((element) => {  
   const option = document.createElement('option');
   option.setAttribute('value', element);
   option.innerText = element;
- 
+
   selectTypeFilters.appendChild(option);
 
-  selectTypeFilters.addEventListener('change', (event)=>{
-    showFiltersOrder = filters(order, 'type', event.target.value);
-    console.log(showFiltersOrder);
-    list.innerHTML = '';
 
-      showFiltersOrder.map((data)=>{
-      const divGeneral = document.createElement('div');
-      divGeneral.classList.add('item-pokemon');
-      const p = document.createElement('p');
-      const divImage = document.createElement('img');
-      p.innerHTML = data.name;
-      divImage.setAttribute('src', data.img);
-      divGeneral.appendChild(divImage);
-      divGeneral.appendChild(p);
-      list.appendChild(divGeneral);
-
-      document.getElementById('profile').style.display = 'none';
- 
-      divGeneral.addEventListener('click', () => {
-        document.getElementById('header').style.display = 'none';
-        document.getElementById('root').style.paddingTop = '0px';
-        document.getElementById('profile').style.display = 'block';
-        document.getElementById('home').style.display = 'none';
-        document.getElementById('header').style.display = 'none';
-     
-        templateDetail(data);
-      });
-    });
+  selectTypeFilters.addEventListener('change', (event) => {
+    /* console.log(event); */
+    
+    showFiltersOrder = filters(POKEMON, 'type', event.target.value);
+    
+    console.log(event.target.value);
+    console.log('data filtrada', showFiltersOrder);
+    list.innerHTML = "";
+        general(showFiltersOrder);
   });
 });
- 
+
 const selectWeaknessesFilters = document.querySelector('#id_weaknesses');
-getOption('weaknesses').map((element) => {
+getOption(order, 'weaknesses').map((element) => {
   const option = document.createElement('option');
   option.setAttribute('value', element);
   option.innerText = element;
- 
+
   selectWeaknessesFilters.appendChild(option);
 
-  selectWeaknessesFilters.addEventListener('change', (event)=>{
+  selectWeaknessesFilters.addEventListener('change', (event) => {
     showFiltersOrder = filters(order, 'weaknesses', event.target.value);
-    console.log(showFiltersOrder);
     list.innerHTML = '';
-
-    showFiltersOrder.map((data)=>{
-      const divGeneral = document.createElement('div');
-      divGeneral.classList.add('item-pokemon');
-      const p = document.createElement('p');
-      const divImage = document.createElement('img');
-      p.innerHTML = data.name;
-      divImage.setAttribute('src', data.img);
-      divGeneral.appendChild(divImage);
-      divGeneral.appendChild(p);
-      list.appendChild(divGeneral);
-
-      document.getElementById('profile').style.display = 'none';
- 
-      divGeneral.addEventListener('click', () => {
-        document.getElementById('header').style.display = 'none';
-        document.getElementById('root').style.paddingTop = '0px';
-        document.getElementById('profile').style.display = 'block';
-        document.getElementById('home').style.display = 'none';
-        document.getElementById('header').style.display = 'none';
-     
-        templateDetail(data);
-      });
-
-    });
+        general(showFiltersOrder);
   });
+});
+
 
 document.getElementById('search').addEventListener('click', () => {
   const textSarch = document.getElementById('search').value;
   const abc = search(order, textSarch.toUpperCase());
   console.log(abc);
-
-});
+}); 
