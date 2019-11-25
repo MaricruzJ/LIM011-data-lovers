@@ -1,5 +1,7 @@
 import POKEMON from './data/pokemon/pokemon.js';
-import { orderData, searchPokemon, search, filters, getOption, topDiez, candies } from './data.js';
+import {
+  orderData, searchPokemon, search, filters, getOption, topDiez, candies,
+} from './data.js';
 
 const list = document.getElementById('list');
 const profile = document.getElementById('profile');
@@ -63,10 +65,7 @@ const templateDetail = (pokemon) => {
 };
 
 const general = (xy) => {
-  console.log('funcion', xy);
-
   xy.forEach((data) => {
-
     const divGeneral = document.createElement('div');
     divGeneral.classList.add('item-pokemon');
 

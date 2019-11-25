@@ -42,7 +42,6 @@ export const search = (dataBase, searchBy) => {
 };
 
 export const topDiez = (dataPokemon) => {
-
   dataPokemon.sort((a, b) => ((a.spawn_chance < b.spawn_chance) ? 1 : -1));
   const resultTopDiez = dataPokemon.slice(0, 10);
   return resultTopDiez;
@@ -96,5 +95,4 @@ export const candies = (data, rango) => {
       }
     });
   }
-
-}
+};
