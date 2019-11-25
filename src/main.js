@@ -1,12 +1,14 @@
 import POKEMON from './data/pokemon/pokemon.js';
 import { orderData, searchPokemon, search, filters, getOption, topDiez, candies } from './data.js';
 
+
 const list = document.querySelector('.list__content');
 const profile = document.getElementById('profile');
 const btnBack = document.getElementById('btn-back');
 const menu = document.getElementById('menu');
 const filtros = document.getElementById('filtros');
 const home = document.getElementById('home');
+
 
 /* menu.addEventListener('click', () => {
   if (filtros.classList.contains('hidden')) {
@@ -27,8 +29,6 @@ btnBack.addEventListener('click', () => {
 
 // datos ordenados de forma ascendente.
 const sortData = orderData(POKEMON);
-
-
 const templateDetail = (pokemon) => {
   const templateTwo = `
                 <div class='content-detail'>
