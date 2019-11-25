@@ -8,6 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -17,39 +18,77 @@
   <div id="root" class="container">
     <aside id="filtros" class="filtros hidden">
       <nav>
-        <div id="showAll">Ver todos:</div>
-        <div id="topTen">Top Ten</div>
-        <p>Ver por tipos</p>
-        <select name="type" id="id_type">
-          <option value="">Elegir tipo...</option>
-        </select>
-        <p>Ver por Debilidades</p>
-        <select name="weaknesses" id="id_weaknesses">
-          <option value="">Elegir debilidad...</option>
-        </select>
-        <p>Ordenar por:</p>
-        <select name="" id="selectSort">
-          <option value="0">Elegir opción...</option>
-          <option value="1">Más fuertes</option>
-          <option value="2">Más débiles</option>
-        </select>
-        <p>Cantidad de candies</p>
-        <select name="" id="selectCandies">
-          <option value="0">Elige cantidad de candies...</option>
-          <option value="1">0 - 25</option>
-          <option value="2">26 - 50</option>
-          <option value="3">51 - 100</option>
-          <option value="4">100 + </option>
-        </select>
+        <div class="list__search">
+          <!--           <img src="./images/menu.svg" alt="menu" id="menu" class="menu show-mobile"> -->
+          <input type="text" id="search" class="search" placeholder="Buscar pokemón">
+        </div>
+        <div class="filter filter--show">
+          <h5 class="filter__title">Mostrar</h5>
+          <div class="filter__content">
+            <div class="filter__content__input">
+              <input type="radio" id="id_show_all" name="show" value="all">
+              <label for="id_show_all">todos</label>
+            </div>
+            <div class="filter__content__input">
+              <input type="radio" id="id_show_topten" name="show" value="topten">
+              <label for="id_show_topten">top 10</label>
+            </div>
+          </div>
+        </div>
+        <div class="filter filter--type">
+          <h5 class="filter__title">Tipos</h5>
+          <div class="filter__content">
+          </div>
+        </div>
+        <div class="filter filter--weaknesses">
+          <h5 class="filter__title">Debilidades</h5>
+          <div class="filter__content">
+          </div>
+        </div>
+        <div class="filter filter--sortby">
+          <h5 class="filter__title">Ordenar por:</h5>
+          <div class="filter__content">
+            <div class="filter__content__input">
+              <input type="radio" id="id_sortby_1" name="sortby" value="1">
+              <label for="id_sortby_1">Más fuertes</label>
+            </div>
+            <div class="filter__content__input">
+              <input type="radio" id="id_sortby_2" name="sortby" value="2">
+              <label for="id_sortby_2">Más débiles</label>
+            </div>
+          </div>
+        </div>
+        <div class="filter filter--candies">
+          <h5 class="filter__title">cantidad de candies</h5>
+          <div class="filter__content">
+            <div class="filter__content__input">
+              <input type="radio" id="id_candies_1" name="candies" value="1">
+              <label for="id_candies_1">0 - 25</label>
+            </div>
+            <div class="filter__content__input">
+              <input type="radio" id="id_candies_2" name="candies" value="2">
+              <label for="id_candies_2">26 - 50</label>
+            </div>
+            <div class="filter__content__input">
+              <input type="radio" id="id_candies_3" name="candies" value="3">
+              <label for="id_candies_3">51 - 100</label>
+            </div>
+            <div class="filter__content__input">
+              <input type="radio" id="id_candies_4" name="candies" value="4">
+              <label for="id_candies_4">+100</label>
+            </div>
+          </div>
+        </div>
       </nav>
     </aside>
     <section class="home" id="home">
       <div id="list" class="container-pokemon">
-        <img src="./images/menu.svg" alt="menu" id="menu" class="menu show-mobile">
-        <input type="text" id="search" class="search" placeholder="Buscar pokemón">
+
+        <div class="list__content">
+        </div>
       </div>
     </section>
-    <div id='content-profile' class="content-profile">
+    <div id="content-profile" class="content-profile">
       <button id="btn-back" class="btn-back">
         <img src="./images/back.svg" alt="volver">VER MÁS POKEMONES
       </button>

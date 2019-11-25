@@ -1,14 +1,14 @@
 import POKEMON from './data/pokemon/pokemon.js';
 import { orderData, searchPokemon, search, filters, getOption, topDiez, candies } from './data.js';
 
-const list = document.getElementById('list');
+const list = document.querySelector('.list__content');
 const profile = document.getElementById('profile');
 const btnBack = document.getElementById('btn-back');
 const menu = document.getElementById('menu');
 const filtros = document.getElementById('filtros');
 const home = document.getElementById('home');
 
-menu.addEventListener('click', () => {
+/* menu.addEventListener('click', () => {
   if (filtros.classList.contains('hidden')) {
     filtros.classList.remove('hidden');
     filtros.classList.add('show');
@@ -16,7 +16,7 @@ menu.addEventListener('click', () => {
     filtros.classList.remove('show');
     filtros.classList.add('hidden');
   }
-});
+}); */
 
 btnBack.addEventListener('click', () => {
   document.getElementById('content-profile').style.display = 'none';
@@ -147,7 +147,7 @@ const general = (xy) => {
 
 general(sortData);
 
-const topTen = document.getElementById('topTen');
+const topTen = document.getElementById('id_show_topten');
 
 const mostrarTopTen = topDiez(sortData);
 
@@ -157,45 +157,71 @@ topTen.addEventListener('click', () => {
 });
 
 let showFiltersOrder = filters(POKEMON, 'filter', 'value');
-const selectTypeFilters = document.querySelector('#id_type');
+const selectTypeFilters = document.querySelector('.filter--type .filter__content');
 
 getOption(POKEMON, 'type').map((element) => {
-  const option = document.createElement('option');
-  option.setAttribute('value', element);
-  option.innerText = element;
+  const div = document.createElement('div');
+  div.classList.add('filter__content__input');
 
-  selectTypeFilters.appendChild(option);
+  const input = document.createElement('input');
+  input.setAttribute('id', `id_type_${element.toLowerCase()}`);
+  input.setAttribute('type', 'radio');
+  input.setAttribute('name', 'type');
+  input.setAttribute('value', element);
 
-  selectTypeFilters.addEventListener('change', (event) => {
+  const label = document.createElement('label');
+  label.setAttribute('for', `id_type_${element.toLowerCase()}`);
+  label.innerText = element;
+
+  div.appendChild(input);
+  div.appendChild(label);
+  selectTypeFilters.appendChild(div);
+
+
+  input.addEventListener('change', (event) => {
     showFiltersOrder = filters(POKEMON, 'type', event.target.value);
     list.innerHTML = '';
     general(showFiltersOrder);
   });
 });
 
-const selectWeaknessesFilters = document.querySelector('#id_weaknesses');
+const selectWeaknessesFilters = document.querySelector('.filter--weaknesses .filter__content');
 getOption(sortData, 'weaknesses').map((element) => {
-  const option = document.createElement('option');
-  option.setAttribute('value', element);
-  option.innerText = element;
+  const div = document.createElement('div');
+  div.classList.add('filter__content__input');
 
-  selectWeaknessesFilters.appendChild(option);
+  const input = document.createElement('input');
+  input.setAttribute('id', `id_weaknesses_${element.toLowerCase()}`);
+  input.setAttribute('type', 'radio');
+  input.setAttribute('name', 'weaknesses');
+  input.setAttribute('value', element);
 
-  selectWeaknessesFilters.addEventListener('change', (event) => {
+  const label = document.createElement('label');
+  label.setAttribute('for', `id_weaknesses_${element.toLowerCase()}`);
+  label.innerText = element;
+
+  div.appendChild(input);
+  div.appendChild(label);
+  selectWeaknessesFilters.appendChild(div);
+
+  input.addEventListener('change', (event) => {
     showFiltersOrder = filters(sortData, 'weaknesses', event.target.value);
     list.innerHTML = '';
     general(showFiltersOrder);
   });
 });
 
-const selectSort = document.querySelector('#selectSort');
-selectSort.addEventListener('change', () => {
-  list.innerHTML = '';
-  const sortBy = orderData(sortData, selectSort.value);
-  general(sortBy);
+const selectSort = document.querySelectorAll('input[name="sortby"]');
+selectSort.forEach((element) => {
+  element.addEventListener('change', () => {
+    list.innerHTML = '';
+    const sortBy = orderData(sortData, element.value);
+    general(sortBy);
+  });
 });
 
-const showAll = document.getElementById('showAll');
+
+const showAll = document.querySelector('input[name="show"]');
 
 showAll.addEventListener('click', () => {
   list.innerHTML = '';
@@ -209,12 +235,10 @@ document.getElementById('search').addEventListener('input', () => {
   general(abc);
 });
 
-const selectCandies = document.getElementById('selectCandies');
-selectCandies.addEventListener('change', () => {
-  list.innerHTML = '';
-  if (selectCandies.value === '0') {
-    general(sortData);
-  } else {
-    general(candies(sortData, selectCandies.value));
-  }
+const selectCandies = document.querySelectorAll('input[name="candies"]');
+selectCandies.forEach((element) => {
+  element.addEventListener('change', () => {
+    list.innerHTML = '';
+    general(candies(sortData, element.value));
+  });
 });
