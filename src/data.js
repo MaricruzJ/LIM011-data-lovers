@@ -96,5 +96,4 @@ export const candies = (data, rango) => {
       }
     });
   }
-
-}
+};
