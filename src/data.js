@@ -47,12 +47,7 @@ export const topDiez = (dataPokemon) => {
 };
 
 export const filters = (data, filterBy, value) => {
-  let dataFound = [];
-  dataFound = data.filter((poke) => {
-    const pokemonFilterBy = poke[filterBy];
-    if (typeof pokemonFilterBy === 'object') return pokemonFilterBy.indexOf(value) > -1;
-    return pokemonFilterBy;
-  });
+  const dataFound = data.filter((pokemon) => pokemon[filterBy].indexOf(value) > -1);
   return dataFound;
 };
 
