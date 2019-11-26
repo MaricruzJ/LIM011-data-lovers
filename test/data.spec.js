@@ -1,22 +1,28 @@
-import { orderData } from '../src/data.js';
+import { orderData, searchPokemon } from '../src/data.js';
 import POKEMON from '../src/data/pokemon/pokemon.js';
 
 describe('orderData ', () => {
-  it('debería ser una función', () => {
+  test('debería ser una función', () => {
     expect(typeof orderData).toBe('function');
   });
   const expected = orderData(POKEMON);
-  describe('orderData debe devolver un arreglo ordenado', () => {
+  test('orderData debe devolver un arreglo', () => {
     expect(orderData(POKEMON)).toEqual(expect.arrayContaining(expected));
+  });
+
+  test('El primer valor de orderData debría de ser ...', () => {
+    expect(orderData(POKEMON, 'strong')[0].name).toEqual('Snorlax');
   });
 });
 
+test('asignacion de objeto', () => {
+  const data = { uno: 1 };
+  data.dos = 2;
+  expect(data).toEqual({ uno: 1, dos: 2 });
+});
+
 describe('searchData ', () => {
-  it('debería ser una función', () => {
-    expect(typeof searchData).toBe('function');
+  test('debería ser una función', () => {
+    expect(typeof searchPokemon).toBe('function');
   });
- /*  const expected = searchData(POKEMON);
-  describe('searchData debe devolver un arreglo ordenado', () => {
-    expect(searchData(POKEMON)).toEqual(expect.arrayContaining(expected));
-  }); */
 });

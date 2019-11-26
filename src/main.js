@@ -1,13 +1,13 @@
 import POKEMON from './data/pokemon/pokemon.js';
 import {
-  orderData, searchPokemon, search, filters, getOption, topDiez, candies,
+  orderData, searchPokemon, searchGroup, filters, getOption, topDiez, candies,
 } from './data.js';
 
 
 const list = document.querySelector('.list__content');
 const profile = document.getElementById('profile');
 const btnBack = document.getElementById('btn-back');
-const menu = document.getElementById('menu');
+/* const menu = document.getElementById('menu'); */
 const filtros = document.getElementById('filtros');
 const home = document.getElementById('home');
 
@@ -31,6 +31,8 @@ btnBack.addEventListener('click', () => {
 
 // datos ordenados de forma ascendente.
 const sortData = orderData(POKEMON);
+console.log(orderData(POKEMON, 'strong')[0]);
+
 const templateDetail = (pokemon) => {
   const templateTwo = `
                 <div class='content-detail'>
@@ -64,8 +66,8 @@ const templateDetail = (pokemon) => {
   profile.innerHTML = templateTwo;
 };
 
-const general = (xy) => {
-  xy.forEach((data) => {
+const general = (dataForTemplate) => {
+  dataForTemplate.forEach((data) => {
     const divGeneral = document.createElement('div');
     divGeneral.classList.add('item-pokemon');
 
@@ -134,8 +136,8 @@ const general = (xy) => {
 
           name.innerHTML = next.name;
 
-          const y = searchPokemon(x, next.num);
-          image.setAttribute('src', y.img);
+          const pokemonByNum = searchPokemon(sortData, next.num);
+          image.setAttribute('src', pokemonByNum.img);
 
           preEvolution.appendChild(divEvolution);
         });
@@ -158,7 +160,7 @@ topTen.addEventListener('click', () => {
 let showFiltersOrder = filters(POKEMON, 'filter', 'value');
 const selectTypeFilters = document.querySelector('.filter--type .filter__content');
 
-getOption(POKEMON, 'type').map((element) => {
+getOption(POKEMON, 'type').forEach((element) => {
   const div = document.createElement('div');
   div.classList.add('filter__content__input');
 
@@ -185,7 +187,7 @@ getOption(POKEMON, 'type').map((element) => {
 });
 
 const selectWeaknessesFilters = document.querySelector('.filter--weaknesses .filter__content');
-getOption(sortData, 'weaknesses').map((element) => {
+getOption(sortData, 'weaknesses').forEach((element) => {
   const div = document.createElement('div');
   div.classList.add('filter__content__input');
 
@@ -229,7 +231,7 @@ showAll.addEventListener('click', () => {
 
 document.getElementById('search').addEventListener('input', () => {
   const textSarch = document.getElementById('search').value;
-  const abc = search(sortData, textSarch.toUpperCase());
+  const abc = searchGroup(sortData, textSarch.toUpperCase());
   list.innerHTML = '';
   general(abc);
 });
