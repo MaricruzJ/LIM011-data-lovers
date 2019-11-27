@@ -1,14 +1,46 @@
-# Data Lovers - Pokemanía
+# Descripción del Proyecto Data Lovers - Pokemanía
+  Nuestros principales usuarios son los jugadores de Pokemon Go.
+  La página fue diseñada con el propósito de brindarle al usuario toda la información sobre los pokemones y puedan jugar de manera estratégica. 
 
-## Objetivos de aprendizaje
+  Nuestra primera vista muestra a la mano derecha todos los pokemones, con su imágen y nombre respectivamente de forma ascendente. En la mano izquierda muestra todos nuestros filtros, por tipos, debilidades, ordenado por los más fuertes y más débiles, cantidad de candies, el top 10 de los Pokemones y finalmente se tiene la opción de volver a mostrarnos todos los pokemos ordenados de forma ascendente. Además en la parte superior de filtros, tenemos un buscador, donde se pueden buscar los pokemones de su preferencia. 
 
-El objetivo principal de este proyecto es que, entendiendo las necesidades de
-tus usuarios, aprendas a diseñar y construir una interfaz web donde se pueda
-visualizar y manipular data.
+  La segunda vista se muestra al darle click al Pokemon, esta contiene la información como su tipo, candy, candy-count, peso, talla, multiplicadores, debilidades, anterior evolución, siguiente evolución. 
 
-Revisa la lista y reflexiona sobre los objetivos que conseguiste en el
-proyecto anterior. Piensa en eso al decidir tu estrategia de trabajo individual
-y de equipo.
+  ### Imágenes sobre el proyecto:
+  
+
+## Investigación UX
+  ### ¿Quiénes son los usuarios y los objetivos en relación con el producto?
+  Nuestros principales usuarios son los jugadores de Pokemon Go.
+  Los usuarios necesitan conocer las caracterísiticas de cada Pokemon. 
+  1. Al usuario le gustaría hacer búsqueda específicas para encontrar a determinado pokemon.
+  2. Al usuario le gustaría ver el top 10 de pokemones de frecuencia de aparición.
+  3. Al usuario le gustaría poder filtrar a los pokemones por sus tipos y debilidades.
+  4. Al usuario le gustaría saber quiénes son los pokemones más fuertes. 
+  5. Al usuario le gustaría saber qué pokemones tienen más debilidades. 
+  6. Al usuario le gustaría saber por rangos, la cantidad de candies que necesita un pokemon.
+  7. Al usuario le gustaría conocer las evoluciones de los pokemones, tanto la anterior como la siguiente evolución. 
+
+  ### ¿Cómo el producto soluciona los problemas/necesidades de dichos usuarios?
+
+  En la primera viste de la página web, se puede encontrar una sección de filtros: 
+  Nos permiten hacer búsquedas específicas. 
+  Muestra a los 10 pokemones con mayor frecuencia de aparición.
+  Filtra a los pokemones por sus tipos y debilidades. 
+  Filtra a los pokemones más fuertes y más débiles. 
+  Filtra a pokemones por por la cantida de candies que necesitan para alimentarse. 
+
+  En la segunda vista, a parte de mostrar todos sus datos de los pokemones, podemos ver sus evoluciones y en base a ello, seguir navegando en cada uno de los pokemones. 
+
+  ### Foto del primer prototipo en papel
+
+  ### Resumen del feedback recibido y las mejoras a realizar
+
+  Inicialmente nuestro búscador se encontraba en la sección donde se viasualizan todos los pokemones, actualmente después de recibir el feedback consideramos que debería ir para el lado izquierdo.
+
+  ### Imagen del prototipo final
+
+  ### Primera vista(/images/Primer prototipo.jpg "Primera vista")
 
 ### UX
 
@@ -54,7 +86,6 @@ y de equipo.
 - [ ] Utilizar identificadores descriptivos (Nomenclatura | Semántica).
 - [ ] Utilizar linter para seguir buenas prácticas (ESLINT).
 
-
 El _boilerplate_ contiene una estructura de archivos como punto de partida así
 como toda la configuración de dependencias:
 
@@ -88,3 +119,4 @@ como toda la configuración de dependencias:
 
 directory: 9 file: 16
 ```
+

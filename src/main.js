@@ -1,15 +1,14 @@
 import POKEMON from './data/pokemon/pokemon.js';
-import { orderData, searchData, search, filters, getOption, topDiez } from './data.js';
+import { orderData, searchPokemon, search, filters, getOption, topDiez, candies } from './data.js';
 
-const list = document.getElementById('list');
+const list = document.querySelector('.list__content');
 const profile = document.getElementById('profile');
 const btnBack = document.getElementById('btn-back');
 const menu = document.getElementById('menu');
 const filtros = document.getElementById('filtros');
 const home = document.getElementById('home');
 
-menu.addEventListener('click', () => {
-
+/* menu.addEventListener('click', () => {
   if (filtros.classList.contains('hidden')) {
     filtros.classList.remove('hidden');
     filtros.classList.add('show');
@@ -17,7 +16,7 @@ menu.addEventListener('click', () => {
     filtros.classList.remove('show');
     filtros.classList.add('hidden');
   }
-})
+}); */
 
 btnBack.addEventListener('click', () => {
   document.getElementById('content-profile').style.display = 'none';
@@ -26,7 +25,8 @@ btnBack.addEventListener('click', () => {
   home.style.padding = '16px';
 });
 
-const order = orderData(POKEMON);
+// datos ordenados de forma ascendente.
+const sortData = orderData(POKEMON);
 
 const templateDetail = (pokemon) => {
   const templateTwo = `
@@ -58,15 +58,12 @@ const templateDetail = (pokemon) => {
                   </div>
                 </div>
               </div>`;
-
   profile.innerHTML = templateTwo;
 };
 
-const general = (order) => {
-console.log('fn genral', order);
+const general = (dataForTemplate) => {
+  dataForTemplate.forEach((data) => {
 
-
-  order.forEach((data) => {
     const divGeneral = document.createElement('div');
     divGeneral.classList.add('item-pokemon');
 
@@ -84,8 +81,6 @@ console.log('fn genral', order);
     document.getElementById('content-profile').style.display = 'none';
 
     divGeneral.addEventListener('click', () => {
-      console.log('hola');
-
       document.getElementById('content-profile').style.display = 'block';
       filtros.classList.remove('show');
       filtros.classList.add('hidden');
@@ -113,11 +108,10 @@ console.log('fn genral', order);
 
           name.innerHTML = next.name;
 
-          const x = searchData(order, next.num);
-          image.setAttribute('src', x.img);
+          const pokemonByNum = searchPokemon(sortData, next.num);
+          image.setAttribute('src', pokemonByNum.img);
 
           nextEvolution.appendChild(divEvolution);
-
         });
       }
 
@@ -128,8 +122,6 @@ console.log('fn genral', order);
         preEvolution.appendChild(title);
 
         data.prev_evolution.forEach((next) => {
-          console.log(next);
-          
           const divEvolution = document.createElement('div');
           divEvolution.setAttribute('class', 'item-pokemon');
           const image = document.createElement('img');
@@ -140,70 +132,108 @@ console.log('fn genral', order);
 
           name.innerHTML = next.name;
 
-          const x = searchData(order, next.num);
-          image.setAttribute('src', x.img);
+          const pokemonByNum = searchPokemon(sortData, next.num);
+          image.setAttribute('src', pokemonByNum.img);
 
-       preEvolution.appendChild(divEvolution); 
-
-
+          preEvolution.appendChild(divEvolution);
         });
       }
     });
   });
 };
 
-general(order);
+general(sortData);
 
-const topTen = document.getElementById('topTen');
+const topTen = document.getElementById('id_show_topten');
 
-const mostrarTopTen = topDiez(order);
+const mostrarTopTen = topDiez(sortData);
 
 topTen.addEventListener('click', () => {
-  list.innerHTML = "";
+  list.innerHTML = '';
   general(mostrarTopTen);
 });
 
 let showFiltersOrder = filters(POKEMON, 'filter', 'value');
+const selectTypeFilters = document.querySelector('.filter--type .filter__content');
 
-const selectTypeFilters = document.querySelector('#id_type');
-getOption(POKEMON, 'type').map((element) => {  
-  const option = document.createElement('option');
-  option.setAttribute('value', element);
-  option.innerText = element;
+getOption(POKEMON, 'type').map((element) => {
+  const div = document.createElement('div');
+  div.classList.add('filter__content__input');
 
-  selectTypeFilters.appendChild(option);
+  const input = document.createElement('input');
+  input.setAttribute('id', `id_type_${element.toLowerCase()}`);
+  input.setAttribute('type', 'radio');
+  input.setAttribute('name', 'type');
+  input.setAttribute('value', element);
 
+  const label = document.createElement('label');
+  label.setAttribute('for', `id_type_${element.toLowerCase()}`);
+  label.innerText = element;
 
-  selectTypeFilters.addEventListener('change', (event) => {
-    /* console.log(event); */
-    
+  div.appendChild(input);
+  div.appendChild(label);
+  selectTypeFilters.appendChild(div);
+
+  input.addEventListener('change', (event) => {
     showFiltersOrder = filters(POKEMON, 'type', event.target.value);
-    
-    console.log(event.target.value);
-    console.log('data filtrada', showFiltersOrder);
-    list.innerHTML = "";
-        general(showFiltersOrder);
-  });
-});
-
-const selectWeaknessesFilters = document.querySelector('#id_weaknesses');
-getOption(order, 'weaknesses').map((element) => {
-  const option = document.createElement('option');
-  option.setAttribute('value', element);
-  option.innerText = element;
-
-  selectWeaknessesFilters.appendChild(option);
-
-  selectWeaknessesFilters.addEventListener('change', (event) => {
-    showFiltersOrder = filters(order, 'weaknesses', event.target.value);
     list.innerHTML = '';
-        general(showFiltersOrder);
+    general(showFiltersOrder);
   });
 });
 
+const selectWeaknessesFilters = document.querySelector('.filter--weaknesses .filter__content');
+getOption(sortData, 'weaknesses').map((element) => {
+  const div = document.createElement('div');
+  div.classList.add('filter__content__input');
 
-document.getElementById('search').addEventListener('click', () => {
+  const input = document.createElement('input');
+  input.setAttribute('id', `id_weaknesses_${element.toLowerCase()}`);
+  input.setAttribute('type', 'radio');
+  input.setAttribute('name', 'weaknesses');
+  input.setAttribute('value', element);
+
+  const label = document.createElement('label');
+  label.setAttribute('for', `id_weaknesses_${element.toLowerCase()}`);
+  label.innerText = element;
+
+  div.appendChild(input);
+  div.appendChild(label);
+  selectWeaknessesFilters.appendChild(div);
+
+  input.addEventListener('change', (event) => {
+    showFiltersOrder = filters(sortData, 'weaknesses', event.target.value);
+    list.innerHTML = '';
+    general(showFiltersOrder);
+  });
+});
+
+const selectSort = document.querySelectorAll('input[name="sortby"]');
+selectSort.forEach((element) => {
+  element.addEventListener('change', () => {
+    list.innerHTML = '';
+    const sortBy = orderData(sortData, element.value);
+    general(sortBy);
+  });
+});
+
+const showAll = document.querySelector('input[name="show"]');
+
+showAll.addEventListener('click', () => {
+  list.innerHTML = '';
+  general(orderData(POKEMON));
+});
+
+document.getElementById('search').addEventListener('input', () => {
   const textSarch = document.getElementById('search').value;
-  const abc = search(order, textSarch.toUpperCase());
-  console.log(abc);
-}); 
+  const abc = search(sortData, textSarch.toUpperCase());
+  list.innerHTML = '';
+  general(abc);
+});
+
+const selectCandies = document.querySelectorAll('input[name="candies"]');
+selectCandies.forEach((element) => {
+  element.addEventListener('change', () => {
+    list.innerHTML = '';
+    general(candies(sortData, element.value));
+  });
+});
