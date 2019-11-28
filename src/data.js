@@ -1,59 +1,39 @@
 export const orderData = (dataPokemon, orderBy) => {
-  let resultOrder = [];
+  let resultSort = [];
 
-  if (orderBy === '1') {
-    resultOrder = dataPokemon.sort((a, b) => {
-      let abc = 0;
-      if (a.weaknesses.length < b.weaknesses.length) abc = -1;
-      if (a.weaknesses.length > b.weaknesses.length) abc = 1;
-      return abc;
+  if (orderBy === 'strong') {
+    resultSort = dataPokemon.sort((a, b) => {
+      let result = 0;
+      if (a.weaknesses.length < b.weaknesses.length) result = -1;
+      if (a.weaknesses.length > b.weaknesses.length) result = 1;
+      return result;
     });
-  } else if (orderBy === '2') {
-    resultOrder = dataPokemon.sort((a, b) => {
-      let abc = 0;
-      if (a.weaknesses.length > b.weaknesses.length) abc = -1;
-      if (a.weaknesses.length < b.weaknesses.length) abc = 1;
-      return abc;
+  } else if (orderBy === 'weak') {
+    resultSort = dataPokemon.sort((a, b) => {
+      let result = 0;
+      if (a.weaknesses.length > b.weaknesses.length) result = -1;
+      if (a.weaknesses.length < b.weaknesses.length) result = 1;
+      return result;
     });
   } else {
-    resultOrder = dataPokemon.sort((a, b) => {
-      let abc = 0;
-      if (a.name < b.name) abc = -1;
-      if (a.name > b.name) abc = 1;
-      return abc;
+    resultSort = dataPokemon.sort((a, b) => {
+      let result = 0;
+      if (a.name < b.name) result = -1;
+      if (a.name > b.name) result = 1;
+      return result;
     });
   }
-  return resultOrder;
+  return resultSort;
 };
 
 export const searchPokemon = (dataBase, searchBy) => {
-  const a = dataBase.find((data) => data.num === searchBy);
-  return a;
-};
-
-export const search = (dataBase, searchBy) => {
-  let x = [];
-  dataBase.forEach((element) => {
-    if (element.name.toUpperCase().indexOf(searchBy) > -1) {
-      x.push(element);
-    }
-  });
-  return x;
+  const dataFound = dataBase.find((data) => data.num === searchBy);
+  return dataFound;
 };
 
 export const topDiez = (dataPokemon) => {
-
   dataPokemon.sort((a, b) => ((a.spawn_chance < b.spawn_chance) ? 1 : -1));
-  const resultTopDiez = dataPokemon.slice(0, 10);
-  return resultTopDiez;
-};
-
-export const filters = (data, filter, value) => {
-  return data.filter((poke) => {
-    const pokeValue = poke[filter];
-    if (typeof pokeValue === 'object') return pokeValue.indexOf(value) > -1;
-    return pokeValue;
-  });
+  return dataPokemon.slice(0, 10);
 };
 
 export const getOption = (POKEMON, property) => {
@@ -64,37 +44,43 @@ export const getOption = (POKEMON, property) => {
       elements.push(value);
     });
   });
+
   return elements;
 };
 
-export const candies = (data, rango) => {
-  if (rango === '1') {
-    return data.filter((element) => {
-      if (element.candy_count > 0 && element.candy_count < 26) {
-        return element;
-      }
-    });
-  }
-  if (rango === '2') {
-    return data.filter((element) => {
-      if (element.candy_count > 25 && element.candy_count < 51) {
-        return element;
-      }
-    });
-  }
-  if (rango === '3') {
-    return data.filter((element) => {
-      if (element.candy_count > 50 && element.candy_count < 101) {
-        return element;
-      }
-    });
-  }
-  if (rango === '4') {
-    return data.filter((element) => {
-      if (element.candy_count > 100) {
-        return element;
-      }
-    });
-  }
+export const filters = (data, filterBy, value) => {
+  const dataFound = data.filter((pokemon) => pokemon[filterBy].indexOf(value) > -1);
+  return dataFound;
+};
 
-}
+
+export const searchGroup = (dataBase, searchBy) => {
+  const group = [];
+  dataBase.forEach((element) => {
+    if (element.name.toUpperCase().indexOf(searchBy) > -1) {
+      group.push(element);
+    }
+  });
+  return group;
+};
+
+export const candies = (data, rango) => {
+  let dataInRange;
+  switch (rango) {
+    case '1':
+      dataInRange = data.filter((element) => element.candy_count > 0 && element.candy_count < 26);
+      break;
+    case '2':
+      dataInRange = data.filter((element) => element.candy_count > 25 && element.candy_count < 51);
+      break;
+    case '3':
+      dataInRange = data.filter((element) => element.candy_count > 50 && element.candy_count < 101);
+      break;
+    case '4':
+      dataInRange = data.filter((element) => element.candy_count > 100);
+      break;
+    default:
+      dataInRange = 'Fuera de rango';
+  }
+  return dataInRange;
+};

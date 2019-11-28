@@ -5,23 +5,27 @@ body{
 }
 
 header{
-  text-align: center;
   width: 100%;
   height: 100px;
+  text-align: center;
 }
 .logo{
-  height: 50%;
-  padding: 20px;
+  height: 70%;
+  padding: 10px;
+  text-align: center;
+
 }
 
 .filtros {
   background-color: white;
   width: 20%;
+  padding : 20px;
 }
 
 .home{
-  background-color: burlywood;
+  background-color: whitesmoke;
   width: 100%;
+  padding : 50px;
 }
 
 .list__content{
@@ -60,11 +64,15 @@ margin: 10px;
 padding: 10px;
 }
 
-.menu {
+/* .menu {
   width: 2%;
-  text-align: center;
   float: right;
   display: block;
+  padding-left: 10px;
+} */
+
+.hidden {
+  display: none;
 }
 
 .filter{
@@ -93,4 +101,49 @@ padding: 10px;
 
 .filter__content__input input[type="radio"]{
 margin-right: 5px;
+}
+
+@media (max-width : 900px){
+  .filtros{
+    display: none;
+    width: 20%;
+    float: inline-end;
+  }
+  .item-pokemon{
+    min-width: 150px;
+  }
+
+  .menu {
+    width: 10%;
+    float: left;
+    display: block;
+    padding-top: 50px;
+    padding-right: 10px;
+    }
+  
+  .hidden {
+    display: block;
+    }
+
+    .home{
+      background-color: whitesmoke;
+      width: 100%;
+      padding : 20px;
+    }
+
+}
+
+@media (min-width: 1224px) and (max-width: 1823px) {
+
+  .menu {
+    display: none;
+  }
+
+  .filtros{
+    display: block;
+  }
+
+  .show{
+    display: none;
+  }
 }
