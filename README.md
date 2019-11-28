@@ -40,9 +40,9 @@
 
   ### Imagen del prototipo final
 
-  ### ![Primera vista!](/images/Primer prototipo.jpeg "Primera vista")
-  ### ![Segunda vista!](/images/Segundo prototipo.jpeg "Segunda vista")
-  ### ![Tercera vista!](/images/tercer prototipo.jpeg "Tercera vista")
+  ![Primera vista!](/src/images/Primer prototipo.jpeg "Primera vista")
+  ![Segunda vista!](/src/images/Segundo prototipo.jpeg "Segunda vista")
+  ![Tercera vista!](/src/images/tercer prototipo.jpeg "Tercera vista")
 
 ### UX
 
