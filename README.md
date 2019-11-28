@@ -40,9 +40,12 @@
 
   ### Imagen del prototipo final
 
-  ![Primera vista!](/src/images/Primer prototipo.jpeg "Primera vista")
+  ![Primera vista!](/src/images/Primer-prototipo.jpeg "Primera vista")
   ![Segunda vista!](/src/images/Segundo prototipo.jpeg "Segunda vista")
   ![Tercera vista!](/src/images/tercer prototipo.jpeg "Tercera vista")
+
+  ![Philadelphia's Magic Gardens. This place was so cool!](/assets/images/philly-magic-gardens.jpg "Philadelphia's Magic Gardens")
+
 
 ### UX
 
@@ -84,7 +87,7 @@
 - [   ] Colaborar en Github (pull requests).
 
 ### Buenas prácticas de desarrollo
-- [   ] Organizar y dividir el código en módulos (Modularización).
+- [  x ] Organizar y dividir el código en módulos (Modularización).
 - [ x ] Utilizar identificadores descriptivos (Nomenclatura | Semántica).
 - [   ] Utilizar linter para seguir buenas prácticas (ESLINT).
 
