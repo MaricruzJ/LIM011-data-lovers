@@ -7,12 +7,12 @@ import {
 const list = document.querySelector('.list__content');
 const profile = document.getElementById('profile');
 const btnBack = document.getElementById('btn-back');
-/* const menu = document.getElementById('menu'); */
+const menu = document.getElementById('menu');
 const filtros = document.getElementById('filtros');
 const home = document.getElementById('home');
 
 
-/* menu.addEventListener('click', () => {
+menu.addEventListener('click', () => {
   if (filtros.classList.contains('hidden')) {
     filtros.classList.remove('hidden');
     filtros.classList.add('show');
@@ -20,7 +20,7 @@ const home = document.getElementById('home');
     filtros.classList.remove('show');
     filtros.classList.add('hidden');
   }
-}); */
+});
 
 btnBack.addEventListener('click', () => {
   document.getElementById('content-profile').style.display = 'none';
@@ -53,13 +53,11 @@ const templateDetail = (pokemon) => {
                     <p>Debilidades: ${pokemon.weaknesses}</p>
                   </div>
                 </div>
-                <div class='rigth'>
                   <div id='evolution'>
                     <div id='preEvolution' class=''>
                     </div>
                     <div id='nextEvolution' class=''>
                     </div>
-                  </div>
                 </div>
               </div>`;
   profile.innerHTML = templateTwo;
