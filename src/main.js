@@ -155,7 +155,7 @@ topTen.addEventListener('click', () => {
 });
 
 
-const showAll = document.querySelector("#id_show_all");
+const showAll = document.querySelector('#id_show_all');
 
 showAll.addEventListener('click', () => {
   list.innerHTML = '';
@@ -224,12 +224,6 @@ selectSort.forEach((element) => {
   });
 });
 
-const showAll = document.querySelector('input[name="show"]');
-
-showAll.addEventListener('click', () => {
-  list.innerHTML = '';
-  general(orderData(sortData));
-});
 document.getElementById('search').addEventListener('input', () => {
   const textSearch = document.getElementById('search').value;
   const abc = searchGroup(sortData, textSearch.toUpperCase());

@@ -59,7 +59,7 @@
 - :white_check_mark: Entender y reconocer por qué es importante el HTML semántico.
 - :white_check_mark: Identificar y entender tipos de selectores en CSS.
 - :white_check_mark: Entender como funciona `flexbox` en CSS.
-- [ ]  Construir tu aplicación respetando el diseño planeado (maquetación).
+- [ ] Construir tu aplicación respetando el diseño planeado (maquetación).
 
 ### DOM
 
