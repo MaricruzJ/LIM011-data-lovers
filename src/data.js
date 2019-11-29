@@ -31,9 +31,24 @@ export const searchPokemon = (dataBase, searchBy) => {
   return dataFound;
 };
 
+export const searchGroup = (dataBase, searchBy) => {
+  const group = [];
+  dataBase.forEach((element) => {
+    if (element.name.toUpperCase().indexOf(searchBy) > -1) {
+      group.push(element);
+    }
+  });
+  return group;
+};
+
 export const topDiez = (dataPokemon) => {
   dataPokemon.sort((a, b) => ((a.spawn_chance < b.spawn_chance) ? 1 : -1));
   return dataPokemon.slice(0, 10);
+};
+
+export const filters = (data, filterBy, value) => {
+  const dataFound = data.filter((pokemon) => pokemon[filterBy].indexOf(value) > -1);
+  return dataFound;
 };
 
 export const getOption = (POKEMON, property) => {
