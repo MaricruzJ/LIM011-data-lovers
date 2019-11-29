@@ -49,48 +49,48 @@
 
 ### UX
 
-- :white_check_mark: Diseñar la aplicación pensando y entendiendo al usuario.
-- :white_check_mark: Crear prototipos para obtener _feedback_ e iterar.
+- [ x ] Diseñar la aplicación pensando y entendiendo al usuario.
+- [ x ] Crear prototipos para obtener _feedback_ e iterar.
 - [ ] Aplicar los principios de diseño visual (contraste, alineación, jerarquía).
-- :white_check_mark: Planear y ejecutar _tests_ de usabilidad.
+- [ x ] Planear y ejecutar _tests_ de usabilidad.
 
 ### HTML y CSS
 
-- :white_check_mark: Entender y reconocer por qué es importante el HTML semántico.
-- :white_check_mark: Identificar y entender tipos de selectores en CSS.
-- :white_check_mark: Entender como funciona `flexbox` en CSS.
+- [ x ] Entender y reconocer por qué es importante el HTML semántico.
+- [ x ] Identificar y entender tipos de selectores en CSS.
+- [ x ] Entender como funciona `flexbox` en CSS.
 - [ ] Construir tu aplicación respetando el diseño planeado (maquetación).
 
 ### DOM
 
-- :white_check_mark: Entender y reconocer los selectores del DOM (querySelector | querySelectorAll).
-- :white_check_mark: Manejar eventos del DOM. (addEventListener)
-- :white_check_mark: Manipular dinámicamente el DOM. (createElement, appendchild, innerHTML, value)
+- [ x ] Entender y reconocer los selectores del DOM (querySelector | querySelectorAll).
+- [ x ] Manejar eventos del DOM. (addEventListener)
+- [ ] Manipular dinámicamente el DOM. (createElement, appendchild, innerHTML, value).
 
 ### Javascript
 
-- :white_check_mark: Manipular arrays (`filter` | `map` | `sort` | `reduce`).
-- :white_check_mark: Manipular objects (key | value).
-- :white_check_mark: Entender el uso de condicionales (`if-else` | `switch`).
-- :white_check_mark: Entender el uso de bucles (`for` | `forEach`).
-- :white_check_mark: Entender la diferencia entre expression y statements.
-- :white_check_mark: Utilizar funciones (parámetros | argumentos | valor de retorno).
-- :white_check_mark: Entender la diferencia entre tipos de datos atómicos y estructurados.
-- :white_check_mark: Utilizar ES Modules (`import` | `export`).
+- [ x ] Manipular arrays (`filter` | `map` | `sort` | `reduce`).
+- [ x ] Manipular objects (key | value).
+- [ x ] Entender el uso de condicionales (`if-else` | `switch`).
+- [ ] Entender el uso de bucles (`for` | `forEach`).
+- [ x ] Entender la diferencia entre expression y statements.
+- [ ] Utilizar funciones (parámetros | argumentos | valor de retorno).
+- [ x ] Entender la diferencia entre tipos de datos atómicos y estructurados.
+- [ x ] Utilizar ES Modules (`import` | `export`).
 
 ### Pruebas Unitarias (_testing_)
-- :white_check_mark: Testear funciones (funciones puras).
+- [ x ] Testear funciones (funciones puras).
 
 ### Git y GitHub
 
-- :white_check_mark: Ejecutar comandos de git (`add` | `commit` | `pull` | `status` | `push`).
-- :white_check_mark: Utilizar los repositorios de GitHub (`clone` | `fork` | gh-pages).
-- :white_check_mark: Colaborar en Github (pull requests).
+- [ x ] Ejecutar comandos de git (`add` | `commit` | `pull` | `status` | `push`).
+- [ x ] Utilizar los repositorios de GitHub (`clone` | `fork` | gh-pages).
+- [ x ] Colaborar en Github (pull requests).
 
 ### Buenas prácticas de desarrollo
-- :white_check_mark: Organizar y dividir el código en módulos (Modularización).
-- :white_check_mark: Utilizar identificadores descriptivos (Nomenclatura | Semántica).
-- :white_check_mark: Utilizar linter para seguir buenas prácticas (ESLINT).
+- [ x ] Organizar y dividir el código en módulos (Modularización).
+- [ ] Utilizar identificadores descriptivos (Nomenclatura | Semántica).
+- [ x ] Utilizar linter para seguir buenas prácticas (ESLINT).
 
 
 El _boilerplate_ contiene una estructura de archivos como punto de partida así
