@@ -154,6 +154,13 @@ topTen.addEventListener('click', () => {
   general(mostrarTopTen);
 });
 
+
+const showAll = document.querySelector("#id_show_all");
+
+showAll.addEventListener('click', () => {
+  list.innerHTML = '';
+  general(orderData(sortData));
+});
 const selectTypeFilters = document.querySelector('.filter--type .filter__content');
 
 getOption(sortData, 'type').forEach((element) => {
@@ -217,14 +224,12 @@ selectSort.forEach((element) => {
   });
 });
 
-
 const showAll = document.querySelector('input[name="show"]');
 
 showAll.addEventListener('click', () => {
   list.innerHTML = '';
   general(orderData(sortData));
 });
-
 document.getElementById('search').addEventListener('input', () => {
   const textSearch = document.getElementById('search').value;
   const abc = searchGroup(sortData, textSearch.toUpperCase());

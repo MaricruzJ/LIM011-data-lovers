@@ -63,6 +63,22 @@ export const getOption = (POKEMON, property) => {
   return elements;
 };
 
+export const filters = (data, filterBy, value) => {
+  const dataFound = data.filter((pokemon) => pokemon[filterBy].indexOf(value) > -1);
+  return dataFound;
+};
+
+
+export const searchGroup = (dataBase, searchBy) => {
+  const group = [];
+  dataBase.forEach((element) => {
+    if (element.name.toUpperCase().indexOf(searchBy) > -1) {
+      group.push(element);
+    }
+  });
+  return group;
+};
+
 export const candies = (data, rango) => {
   let dataInRange;
   switch (rango) {
